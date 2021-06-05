@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trancentum_web_app/theme.dart';
 
+import 'package:trancentum_web_app/theme.dart';
 import 'routes.dart';
-import 'screens/sign_in_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/sign_in/sign_in_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: SignInScreen(),
+      home: HomeScreen(),
       routes: routes,
     );
   }

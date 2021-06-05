@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-import '../../responsive_widget.dart';
+import '../../../constants.dart';
+import '../../../responsive_widget.dart';
+
 
 class Body extends StatelessWidget {
   const Body({Key key}) : super(key: key);
@@ -64,7 +65,7 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         children: [
           TextFormField(
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: whiteColor),
             decoration: InputDecoration(
               filled: true,
               fillColor: darkBgColor,
@@ -85,7 +86,7 @@ class _SignInFormState extends State<SignInForm> {
           ),
           SizedBox(height: defaultPadding),
           TextFormField(
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: whiteColor),
             decoration: InputDecoration(
               filled: true,
               fillColor: darkBgColor,
@@ -152,7 +153,7 @@ class _SignInFormState extends State<SignInForm> {
                 "Se connecter",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.white,
+                  color: whiteColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -191,7 +192,7 @@ class Header extends StatelessWidget {
         Text(
           "Se connecter à TranCENTUM",
           style: TextStyle(
-            color: Colors.white,
+            color: whiteColor,
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
@@ -200,14 +201,14 @@ class Header extends StatelessWidget {
         Text(
           "Vous n'avez pas de compte ?",
           style: TextStyle(
-            color: Colors.white,
+            color: whiteColor,
           ),
         ),
         SizedBox(width: 2 * defaultPadding),
         OutlinedButton(
           onPressed: () {},
           style: OutlinedButton.styleFrom(
-            primary: Colors.white,
+            primary: whiteColor,
             padding: EdgeInsets.all(defaultPadding),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

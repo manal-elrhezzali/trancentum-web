@@ -37,14 +37,18 @@ class HeaderPackageInfoCard extends StatelessWidget {
             ),
             title: Text(
               info.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  fontSize: 18, color: whiteColor, fontWeight: FontWeight.bold),
+                  fontSize: 16, color: whiteColor, fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
               info.nbrOfPackages.toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.5),
-                fontSize: 16,
+                fontSize: 14,
               ),
             ),
             trailing: Icon(

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/models/package_status_info.dart';
+import 'package:trancentum_web_app/models/expedition.dart';
 
 import '../../../constants.dart';
 
-class HeaderPackageInfoCard extends StatelessWidget {
-  const HeaderPackageInfoCard({
+class RecentExpeditionCard extends StatelessWidget {
+  const RecentExpeditionCard({
     Key key,
     @required this.info,
-    @required this.myPackages,
+    @required this.myRecentExpedtions,
     @required this.tapHandler,
   }) : super(key: key);
-
-  final PackagesStatusInfo info;
-  final List<PackagesStatusInfo> myPackages;
+  final Expedition info;
+  final List<Expedition> myRecentExpedtions;
   final Function tapHandler;
 
   @override
@@ -30,15 +29,15 @@ class HeaderPackageInfoCard extends StatelessWidget {
               width: 8,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: info.color,
+                  color: kSecondaryColor,
                   width: 1.0,
                 ),
-                color: info.color,
+                color: kSecondaryColor,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
             title: Text(
-              info.title,
+              info.codeExpedition,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -48,17 +47,23 @@ class HeaderPackageInfoCard extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              info.nbrOfPackages.toString(),
+              info.date,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
+                fontSize: 13,
                 color: Colors.white.withOpacity(0.5),
-                fontSize: 14,
               ),
             ),
-            trailing: Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: kSecondaryColor,
+            trailing: Text(
+              info.etat,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 16,
+                color: whiteColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

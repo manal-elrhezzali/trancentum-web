@@ -10,12 +10,16 @@ class PackageStatusInfoCardGridView extends StatelessWidget {
     @required this.demoMyPackages,
     this.crossAxisCount = 2,
     this.childAspectRatio = 2.5,
+    @required this.tapHandler, 
   }) : super(key: key);
 
   final List<PackagesStatusInfo> demoMyPackages;
+ 
 
   final int crossAxisCount;
   final double childAspectRatio;
+  final Function tapHandler;
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -31,6 +35,7 @@ class PackageStatusInfoCardGridView extends StatelessWidget {
       itemBuilder: (context, index) => HeaderPackageInfoCard(
         info: demoMyPackages[index],
         myPackages: demoMyPackages,
+        tapHandler: tapHandler,
       ),
     );
   }

@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trancentum_web_app/constants.dart';
+import 'package:trancentum_web_app/models/expedition.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
 
 import 'package_status_info_card_grid_view.dart';
+import 'recent_expedition_card_grid_view.dart';
 
 class Body extends StatelessWidget {
   Body({Key key}) : super(key: key);
@@ -40,6 +43,7 @@ class Body extends StatelessWidget {
       color: Colors.orange,
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,10 +53,11 @@ class Body extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //status
                 Container(
-                  padding: EdgeInsets.all(defaultPadding),
+                  // padding: EdgeInsets.all(defaultPadding),
                   width: double.infinity,
                   decoration: BoxDecoration(color: darkBgColor),
                   child: Text(
@@ -64,17 +69,53 @@ class Body extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                SizedBox(height: defaultPadding),
+                //package status header
                 PackageStatusInfoCardGridView(
                   demoMyPackages: demoMyPackages,
+                  tapHandler: () {},
                 ),
-
-                SizedBox(height: defaultPadding * 2),
-                //datatable Container
+                SizedBox(height: defaultPadding),
                 Container(
+                  // padding: EdgeInsets.all(defaultPadding),
                   width: double.infinity,
-                  child: Text("DataTable container"),
-                  color: Colors.pink,
+                  decoration: BoxDecoration(color: darkBgColor),
+                  child: Text(
+                    "Expeditions Récentes",
+                    style: TextStyle(
+                      color: whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                SizedBox(height: defaultPadding),
+                //expedition consultees
+                RecentExpeditionCardGridView(
+                  childAspectRatio: 5,
+                  tapHandler: () {},
+                  crossAxisCount: 1,
+                  demoRecentExpeditions: demoRecentExpeditions,
+                ),
+                SizedBox(height: defaultPadding),
+
+                Container(
+                  padding: EdgeInsets.all(defaultPadding / 2),
+                  width: double.infinity,
+                  color: bgColor,
+                  child: FlatButton(
+                    onPressed: () {},
+                    child: Expanded(
+                      child: Text(
+                        "TOUT AFFICHER",
+                        style: TextStyle(
+                          color: whiteColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

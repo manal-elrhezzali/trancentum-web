@@ -8,7 +8,7 @@ const kPrimaryLightColor = Color(0xFF858BA6);
 //   colors: [Color(0xFF6470A6), Color(0xFF4256A6)],
 // );
 const kSecondaryColor = Color(0xFF979797);
-const kTextColor = Color(0xFF757575);
+const greyColor = Color(0xFF757575);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 

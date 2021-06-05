@@ -73,7 +73,7 @@ class _SideMenuState extends State<SideMenu> {
             SideMenuItem(
               showText: showNewPackageText,
               icon: Icons.inventory_2_outlined,
-              text: "Nouvelle Expedition",
+              text: "New Expedition",
               pressHandler: () {
                 setState(() {
                   showNewPackageText = !showNewPackageText;

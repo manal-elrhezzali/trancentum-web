@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const kPrimaryColor = Color(0xFF3A37C2);
 const kPrimaryLightColor = Color(0xFF858BA6);
 // const kPrimaryGradientColor = LinearGradient(
 //   begin: Alignment.topLeft,
@@ -22,6 +23,11 @@ const whiteColor = Colors.white70;
 const greenColor = Color(0xFF1EB980);
 const defaultPadding = 16.0;
 const redColor = Color(0xFFFF6859);
+//add brown
+//add orange
+
+
+
 
 // Form Error
 //add ICE RegExp
@@ -31,18 +37,4 @@ const String kPasswordNullError = "Please Enter your password";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 //add validation of complete profile
 
-// final otpInputDecoration = InputDecoration(
-//   contentPadding: EdgeInsets.symmetric(
-//     vertical: getProportionateScreenWidth(15),
-//   ),
-//   enabledBorder: outlineInputBorder(),
-//   focusedBorder: outlineInputBorder(),
-//   border: outlineInputBorder(),
-// );
 
-// OutlineInputBorder outlineInputBorder() {
-//   return OutlineInputBorder(
-//     borderRadius: BorderRadius.circular(15),
-//     borderSide: BorderSide(color: kTextColor),
-//   );
-// }

@@ -9,8 +9,14 @@ import 'package:trancentum_web_app/models/package_status_info.dart';
 import 'package_status_info_card_grid_view.dart';
 import 'recent_expedition_card_grid_view.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   final List<PackagesStatusInfo> demoMyPackages = [
     PackagesStatusInfo(
       title: "Enregistrée",
@@ -43,6 +49,8 @@ class Body extends StatelessWidget {
       color: Colors.orange,
     ),
   ];
+
+  bool showAll = false;
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +104,7 @@ class Body extends StatelessWidget {
                   tapHandler: () {},
                   crossAxisCount: 1,
                   demoRecentExpeditions: demoRecentExpeditions,
+                  showAll: showAll,
                 ),
                 SizedBox(height: defaultPadding),
 
@@ -104,10 +113,14 @@ class Body extends StatelessWidget {
                   width: double.infinity,
                   color: bgColor,
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        showAll = !showAll;
+                      });
+                    },
                     child: Expanded(
                       child: Text(
-                        "TOUT AFFICHER",
+                        showAll ? "REDUIRE" : "TOUT AFFICHER",
                         style: TextStyle(
                           color: whiteColor,
                           fontWeight: FontWeight.bold,

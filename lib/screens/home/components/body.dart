@@ -49,7 +49,6 @@ class _BodyState extends State<Body> {
       color: Colors.orange,
     ),
   ];
-
   bool showAll = false;
 
   @override
@@ -69,7 +68,7 @@ class _BodyState extends State<Body> {
                   width: double.infinity,
                   decoration: BoxDecoration(color: darkBgColor),
                   child: Text(
-                    "Status d'Expeditions",
+                    "Status Expeditions",
                     style: TextStyle(
                       color: whiteColor,
                       fontWeight: FontWeight.bold,
@@ -89,7 +88,7 @@ class _BodyState extends State<Body> {
                   width: double.infinity,
                   decoration: BoxDecoration(color: darkBgColor),
                   child: Text(
-                    "Expeditions Récentes",
+                    "Expeditions Consultées",
                     style: TextStyle(
                       color: whiteColor,
                       fontWeight: FontWeight.bold,
@@ -107,7 +106,6 @@ class _BodyState extends State<Body> {
                   showAll: showAll,
                 ),
                 SizedBox(height: defaultPadding),
-
                 Container(
                   padding: EdgeInsets.all(defaultPadding / 2),
                   width: double.infinity,
@@ -118,14 +116,12 @@ class _BodyState extends State<Body> {
                         showAll = !showAll;
                       });
                     },
-                    child: Expanded(
-                      child: Text(
-                        showAll ? "REDUIRE" : "TOUT AFFICHER",
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
+                    child: Text(
+                      showAll ? "REDUIRE" : "TOUT AFFICHER",
+                      style: TextStyle(
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
                     ),
                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'size_config.dart';
+
 const kPrimaryColor = Color(0xFF3A37C2);
 const kPrimaryLightColor = Color(0xFF858BA6);
 // const kPrimaryGradientColor = LinearGradient(
@@ -35,4 +37,18 @@ const String kPasswordNullError = "Please Enter your password";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 //add validation of complete profile
 
+final otpInputDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(
+    vertical: getProportionateScreenWidth(15),
+  ),
+  enabledBorder: outlineInputBorder(),
+  focusedBorder: outlineInputBorder(),
+  border: outlineInputBorder(),
+);
 
+OutlineInputBorder outlineInputBorder() {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15),
+    borderSide: BorderSide(color: greyColor),
+  );
+}

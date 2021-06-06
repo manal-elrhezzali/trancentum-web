@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
-class ForgotPasswordForm extends StatelessWidget {
-  const ForgotPasswordForm({Key key}) : super(key: key);
+class OtpForm extends StatelessWidget {
+  const OtpForm({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ForgotPasswordForm extends StatelessWidget {
               fillColor: darkBgColor,
               border: underlineInputBorder,
               focusedBorder: underlineInputBorder,
-              labelText: "TELEPHONE",
+              labelText: "OTP code",
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               labelStyle: TextStyle(color: whiteColor),
               contentPadding: EdgeInsets.symmetric(
@@ -56,7 +56,7 @@ class ForgotPasswordForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Vous n'avez pas de compte?",
+                "Vous n'avez pas reçu le code ?",
                 style: TextStyle(
                   color: whiteColor,
                   fontSize: 18,
@@ -64,9 +64,11 @@ class ForgotPasswordForm extends StatelessWidget {
               ),
               SizedBox(width: 10),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  //resend otp code
+                },
                 child: Text(
-                  "Contactez-nous",
+                  "Renvoyez le code",
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                     color: redColor,

@@ -20,14 +20,12 @@ const secondaryColor = Color(0xFF73BCFF);
 const darkBgColor = Color(0xFF212332);
 const bgColor = Color(0xFF2A2D3E);
 const whiteColor = Colors.white70;
+const reallyWhiteColor = Colors.white;
 const greenColor = Color(0xFF1EB980);
 const defaultPadding = 16.0;
 const redColor = Color(0xFFFF6859);
 //add brown
 //add orange
-
-
-
 
 // Form Error
 //add ICE RegExp

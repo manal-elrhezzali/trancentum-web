@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             //home body
             Expanded(
               flex: 5,
-              child: SingleChildScrollView(child: Body()),
+              child: Body(),
             ),
           ],
         ),

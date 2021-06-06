@@ -52,7 +52,7 @@ class RecentExpeditionCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.white.withOpacity(0.5),
+                color: reallyWhiteColor.withOpacity(0.5),
               ),
             ),
             trailing: Text(

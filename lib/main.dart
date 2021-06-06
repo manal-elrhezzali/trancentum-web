@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
 
 import 'package:trancentum_web_app/theme.dart';
 import 'routes.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: HomeScreen(),
+      home: ForgotPasswordScreen(),
       routes: routes,
     );
   }

@@ -9,6 +9,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:trancentum_web_app/constants.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
+import 'package:trancentum_web_app/responsive_widget.dart';
 
 import 'expeditions_chart.dart';
 import 'notifications_section.dart';
@@ -109,73 +110,78 @@ class _BodyState extends State<Body> {
     return Center(
       child: SingleChildScrollView(
         padding: EdgeInsets.all(defaultPadding * 2),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  //status
-                  SectionTitle(title: "Status Expeditions"),
-                  SizedBox(height: defaultPadding),
-                  //package status header
-                  PackageStatusInfoCardGridView(
-                    demoMyPackages: demoMyPackages,
-                    tapHandler: () {},
-                  ),
-                  SizedBox(height: defaultPadding),
-                                    SectionTitle(title: "Expeditions Consultées"),
-
-                  SizedBox(height: defaultPadding),
-                  //expedition consultees
-                  RecentExpeditionCardGridView(
-                    childAspectRatio: 5,
-                    tapHandler: () {},
-                    crossAxisCount: 1,
-                    demoRecentExpeditions: demoRecentExpeditions,
-                    showAll: showAllRecentPackages,
-                  ),
-                  SizedBox(height: defaultPadding),
-                  //tout afficher button
-                  ShowOrReduceButton(
-                    pressHandler: () {
-                      setState(() {
-                        showAllRecentPackages = !showAllRecentPackages;
-                      });
-                    },
-                    showAll: showAllRecentPackages,
-                  ),
-                ],
+        child: ResponsiveWidget(
+          desktop: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    //status
+                    SectionTitle(title: "Status Expeditions"),
+                    SizedBox(height: defaultPadding),
+                    //package status header
+                    PackageStatusInfoCardGridView(
+                      demoMyPackages: demoMyPackages,
+                      tapHandler: () {},
+                    ),
+                    SizedBox(height: defaultPadding),
+                    SectionTitle(title: "Expeditions Consultées"),
+        
+                    SizedBox(height: defaultPadding),
+                    //expedition consultees
+                    RecentExpeditionCardGridView(
+                      childAspectRatio: 5,
+                      tapHandler: () {},
+                      crossAxisCount: 1,
+                      demoRecentExpeditions: demoRecentExpeditions,
+                      showAll: showAllRecentPackages,
+                    ),
+                    SizedBox(height: defaultPadding),
+                    //tout afficher button
+                    ShowOrReduceButton(
+                      pressHandler: () {
+                        setState(() {
+                          showAllRecentPackages = !showAllRecentPackages;
+                        });
+                      },
+                      showAll: showAllRecentPackages,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(width: defaultPadding),
-            Expanded(
-              child: Column(
-                children: [
-                  SectionTitle(title: "Graphe Expeditions"),
-                  SizedBox(height: defaultPadding),
-                  // expedition status chart
-                  ExpeditionsChart(
-                    pieChartSectionData: pieChartSectionData,
-                    totalOfExpeditions: 342,
-                  ),
-                  SizedBox(height: defaultPadding * 2),
-                  //NOTIFICATIONS
-                  NotificationsSection(
-                    showAll: showAllNotifications,
-                    pressHandler: () {
-                      setState(() {
-                        showAllNotifications = !showAllNotifications;
-                      });
-                    },
-                  ),
-                ],
+              SizedBox(width: defaultPadding),
+              Expanded(
+                child: Column(
+                  children: [
+                    SectionTitle(title: "Graphe Expeditions"),
+                    SizedBox(height: defaultPadding),
+                    // expedition status chart
+                    ExpeditionsChart(
+                      pieChartSectionData: pieChartSectionData,
+                      totalOfExpeditions: 342,
+                    ),
+                    SizedBox(height: defaultPadding * 2),
+                    //NOTIFICATIONS
+                    NotificationsSection(
+                      showAll: showAllNotifications,
+                      pressHandler: () {
+                        setState(() {
+                          showAllNotifications = !showAllNotifications;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
+          mobile: Container(
+          //mobile
+          child: Text("OOps i am mobile design"),
+        ),
         ),
       ),
     );
   }
 }
-

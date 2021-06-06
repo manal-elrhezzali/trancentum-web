@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/components/side_menu.dart';
 
 import '../../constants.dart';
 import 'components/body.dart';
@@ -12,7 +13,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: darkBgColor,
       body: SafeArea(
-        child: Body(),
+        child: Body()
       ),
     );
   }

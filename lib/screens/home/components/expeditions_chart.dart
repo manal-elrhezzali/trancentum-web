@@ -35,7 +35,7 @@ class ExpeditionsChart extends StatelessWidget {
                 Text(
                   "Total",
                   style: Theme.of(context).textTheme.headline3.copyWith(
-                        color: Colors.white,
+                        color: reallyWhiteColor,
                         fontWeight: FontWeight.w600,
                       ),
                 ),

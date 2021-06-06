@@ -52,7 +52,7 @@ class HeaderPackageInfoCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: Colors.white.withOpacity(0.5),
+                color: reallyWhiteColor.withOpacity(0.5),
                 fontSize: 14,
               ),
             ),

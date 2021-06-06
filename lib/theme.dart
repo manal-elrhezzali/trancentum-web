@@ -4,7 +4,7 @@ import 'constants.dart';
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: reallyWhiteColor,
     fontFamily: "RobotoCondensed",
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
@@ -23,13 +23,13 @@ TextTheme textTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
-    color: Colors.white,
+    color: reallyWhiteColor,
     elevation: 0,
     brightness: Brightness.light,
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: IconThemeData(color: reallyWhiteColor),
     textTheme: TextTheme(
       headline6: TextStyle(
-        color: Colors.white,
+        color: reallyWhiteColor,
         fontSize: 18,
       ),
     ),

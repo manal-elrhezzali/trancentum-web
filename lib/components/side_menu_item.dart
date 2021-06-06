@@ -23,14 +23,14 @@ class SideMenuItem extends StatelessWidget {
         onPressed: pressHandler,
         icon: Icon(
           icon,
-          color: showText ? whiteColor : kSecondaryColor,
+          color: showText ? reallyWhiteColor : kSecondaryColor,
         ),
       ),
       if (showText)
         Text(
           text,
           style: TextStyle(
-            color: whiteColor,
+            color: reallyWhiteColor,
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),

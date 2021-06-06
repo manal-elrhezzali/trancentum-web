@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: Text(
-                        "We sent your code to +212 676 175 *** ",
+                        "We sent a 4-digit code to +212 676 175 *** ",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         maxLines: 3,

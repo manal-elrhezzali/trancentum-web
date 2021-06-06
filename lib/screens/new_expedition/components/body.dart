@@ -19,6 +19,12 @@ class Body extends StatelessWidget {
                 child: Column(
                   children: [
                     // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
                   ],
                 ),
               ),
@@ -26,6 +32,11 @@ class Body extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
+                    // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
+                    // something will go here
                     // something will go here
                   ],
                 ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
+import 'package:trancentum_web_app/responsive_widget.dart';
 
 import '../../constants.dart';
-import 'components/body.dart';
+import 'components/desktop_body.dart';
+import 'components/mobile_body.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/home";
@@ -14,17 +16,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: darkBgColor,
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //side menu
-            Expanded(child: SideMenu()),
-            //home body
-            Expanded(
-              flex: 5,
-              child: Body(),
-            ),
-          ],
+        child: ResponsiveWidget(
+          mobile: MobileBody(),
+          desktop: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //side menu
+              Expanded(child: SideMenu()),
+              //home body
+              Expanded(
+                flex: 5,
+                child: DesktopBody(),
+              ),
+            ],
+          ),
         ),
       ),
     );

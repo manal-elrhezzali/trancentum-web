@@ -45,7 +45,7 @@ class ForgotPasswordForm extends StatelessWidget {
               child: Text(
                 "Continuer",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   color: whiteColor,
                   fontWeight: FontWeight.bold,
                 ),

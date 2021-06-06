@@ -10,8 +10,12 @@ import 'package:trancentum_web_app/constants.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
 
+import 'expeditions_chart.dart';
+import 'notifications_section.dart';
 import 'package_status_info_card_grid_view.dart';
 import 'recent_expedition_card_grid_view.dart';
+import 'section_title.dart';
+import 'show_or_Reduce_button.dart';
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -112,19 +116,7 @@ class _BodyState extends State<Body> {
               child: Column(
                 children: [
                   //status
-                  Container(
-                    // padding: EdgeInsets.all(defaultPadding),
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: darkBgColor),
-                    child: Text(
-                      "Status Expeditions",
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+                  SectionTitle(title: "Status Expeditions"),
                   SizedBox(height: defaultPadding),
                   //package status header
                   PackageStatusInfoCardGridView(
@@ -132,19 +124,8 @@ class _BodyState extends State<Body> {
                     tapHandler: () {},
                   ),
                   SizedBox(height: defaultPadding),
-                  Container(
-                    // padding: EdgeInsets.all(defaultPadding),
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: darkBgColor),
-                    child: Text(
-                      "Expeditions Consultées",
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+                                    SectionTitle(title: "Expeditions Consultées"),
+
                   SizedBox(height: defaultPadding),
                   //expedition consultees
                   RecentExpeditionCardGridView(
@@ -156,25 +137,13 @@ class _BodyState extends State<Body> {
                   ),
                   SizedBox(height: defaultPadding),
                   //tout afficher button
-                  Container(
-                    padding: EdgeInsets.all(defaultPadding / 2),
-                    width: double.infinity,
-                    color: bgColor,
-                    child: FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          showAllRecentPackages = !showAllRecentPackages;
-                        });
-                      },
-                      child: Text(
-                        showAllRecentPackages ? "REDUIRE" : "TOUT AFFICHER",
-                        style: TextStyle(
-                          color: whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
+                  ShowOrReduceButton(
+                    pressHandler: () {
+                      setState(() {
+                        showAllRecentPackages = !showAllRecentPackages;
+                      });
+                    },
+                    showAll: showAllRecentPackages,
                   ),
                 ],
               ),
@@ -183,142 +152,23 @@ class _BodyState extends State<Body> {
             Expanded(
               child: Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: darkBgColor),
-                    child: Text(
-                      "Graphe Expeditions",
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
+                  SectionTitle(title: "Graphe Expeditions"),
                   SizedBox(height: defaultPadding),
                   // expedition status chart
-                  Container(
-                    width: double.infinity,
-                    height: 200,
-                    child: Stack(
-                      children: [
-                        PieChart(
-                          PieChartData(
-                            sectionsSpace: 0,
-                            centerSpaceRadius: 100,
-                            startDegreeOffset: -90,
-                            sections: pieChartSectionData,
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Total",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3
-                                    .copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                              Text(
-                                "of 342 Exped.",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                      color: whiteColor,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  ExpeditionsChart(
+                    pieChartSectionData: pieChartSectionData,
+                    totalOfExpeditions: 342,
                   ),
                   SizedBox(height: defaultPadding * 2),
-                  //Notifications
-                  Container(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Notifications",
-                          style: TextStyle(
-                            color: whiteColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: defaultPadding),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: showAllNotifications ? 6 : 3,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              color: bgColor,
-                              elevation: 0,
-                              child: ListTile(
-                                contentPadding: EdgeInsets.all(defaultPadding),
-                                leading: Icon(
-                                  Icons.notification_important_outlined,
-                                  color: kSecondaryColor,
-                                ),
-                                title: Text(
-                                  "I am a notification notification notification notification",
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: whiteColor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    //delete the notification
-                                  },
-                                  icon: Icon(
-                                    Icons.delete_forever_outlined,
-                                    color: redColor,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        SizedBox(height: defaultPadding),
-                        //tout afficher button
-                        Container(
-                          padding: EdgeInsets.all(defaultPadding / 2),
-                          width: double.infinity,
-                          color: bgColor,
-                          child: FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                showAllNotifications = !showAllNotifications;
-                              });
-                            },
-                            child: Text(
-                              showAllNotifications
-                                  ? "REDUIRE"
-                                  : "TOUT AFFICHER",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  //NOTIFICATIONS
+                  NotificationsSection(
+                    showAll: showAllNotifications,
+                    pressHandler: () {
+                      setState(() {
+                        showAllNotifications = !showAllNotifications;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
@@ -328,3 +178,4 @@ class _BodyState extends State<Body> {
     );
   }
 }
+

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
+import 'package:trancentum_web_app/screens/home/home_screen.dart';
+import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
 import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
 import 'package:trancentum_web_app/theme.dart';
 import 'routes.dart';
-import 'screens/home/home_screen.dart';
-import 'screens/sign_in/sign_in_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: OtpScreen(),
+      home: NewExpeditionScreen(),
       routes: routes,
     );
   }

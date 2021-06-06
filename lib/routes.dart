@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
 import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
 import 'screens/forgot_password/forgot_pasword_screen.dart';
@@ -10,4 +11,5 @@ final Map<String, WidgetBuilder> routes = {
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   OtpScreen.routeName: (context) => OtpScreen(),
+  NewExpeditionScreen.routeName: (context) => NewExpeditionScreen(),
 };

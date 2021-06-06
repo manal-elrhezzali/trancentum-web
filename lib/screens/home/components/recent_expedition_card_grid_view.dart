@@ -10,7 +10,8 @@ class RecentExpeditionCardGridView extends StatelessWidget {
     @required this.demoRecentExpeditions,
     @required this.crossAxisCount,
     @required this.childAspectRatio,
-    @required this.tapHandler, @required this.showAll,
+    @required this.tapHandler,
+    @required this.showAll,
   }) : super(key: key);
 
   final List<Expedition> demoRecentExpeditions;
@@ -23,7 +24,9 @@ class RecentExpeditionCardGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: ScrollPhysics(),
-      itemCount: showAll ? demoRecentExpeditions.length : (demoRecentExpeditions.length / 2).toInt(), //dummy data
+      itemCount: showAll
+          ? demoRecentExpeditions.length
+          : (demoRecentExpeditions.length ~/ 2), //dummy data
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,

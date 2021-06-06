@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -154,6 +155,7 @@ class _BodyState extends State<Body> {
                     showAll: showAllRecentPackages,
                   ),
                   SizedBox(height: defaultPadding),
+                  //tout afficher button
                   Container(
                     padding: EdgeInsets.all(defaultPadding / 2),
                     width: double.infinity,
@@ -180,7 +182,6 @@ class _BodyState extends State<Body> {
             SizedBox(width: defaultPadding),
             Expanded(
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: double.infinity,
@@ -195,23 +196,54 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   SizedBox(height: defaultPadding),
+                  // expedition status chart
                   Container(
                     width: double.infinity,
                     height: 200,
-                    child: PieChart(
-                      PieChartData(
-                        sectionsSpace: 0,
-                        centerSpaceRadius: 100,
-                        startDegreeOffset: -90,
-                        sections: pieChartSectionData,
-                      ),
+                    child: Stack(
+                      children: [
+                        PieChart(
+                          PieChartData(
+                            sectionsSpace: 0,
+                            centerSpaceRadius: 100,
+                            startDegreeOffset: -90,
+                            sections: pieChartSectionData,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Total",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline3
+                                    .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                              Text(
+                                "of 342 Exped.",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                      color: whiteColor,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: defaultPadding * 2),
                   //Notifications
                   Container(
                     width: double.infinity,
-                    // color: ,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -261,6 +293,7 @@ class _BodyState extends State<Body> {
                           },
                         ),
                         SizedBox(height: defaultPadding),
+                        //tout afficher button
                         Container(
                           padding: EdgeInsets.all(defaultPadding / 2),
                           width: double.infinity,

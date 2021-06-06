@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
 
 import '../../constants.dart';
 import 'components/body.dart';

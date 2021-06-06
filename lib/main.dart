@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: ForgotPasswordScreen(),
+      home: SignInScreen(),
       routes: routes,
     );
   }

@@ -19,6 +19,7 @@ class RecentExpeditionCard extends StatelessWidget {
     Size _size = MediaQuery.of(context).size;
 
     return InkWell(
+      mouseCursor: SystemMouseCursors.click,
       onTap: tapHandler,
       child: Container(
         decoration: BoxDecoration(

@@ -17,49 +17,46 @@ class HeaderPackageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: InkWell(
-        onTap: tapHandler,
-        child: Card(
-          color: bgColor,
-          elevation: 0,
-          child: ListTile(
-            contentPadding: EdgeInsets.all(defaultPadding),
-            leading: Container(
-              height: 40,
-              width: 8,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: info.color,
-                  width: 1.0,
-                ),
+    return InkWell(
+      onTap: tapHandler,
+      child: Card(
+        color: bgColor,
+        elevation: 0,
+        child: ListTile(
+          leading: Container(
+            height: 40,
+            width: 8,
+            decoration: BoxDecoration(
+              border: Border.all(
                 color: info.color,
-                borderRadius: BorderRadius.circular(10),
+                width: 1.0,
               ),
+              color: info.color,
+              borderRadius: BorderRadius.circular(10),
             ),
-            title: Text(
-              info.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 16,
-                color: whiteColor,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+          title: Text(
+            info.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 16,
+              color: whiteColor,
+              fontWeight: FontWeight.bold,
             ),
-            subtitle: Text(
-              info.nbrOfPackages.toString(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: reallyWhiteColor.withOpacity(0.5),
-                fontSize: 14,
-              ),
+          ),
+          subtitle: Text(
+            info.nbrOfPackages.toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: reallyWhiteColor.withOpacity(0.5),
+              fontSize: 14,
             ),
-            trailing: Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: kSecondaryColor,
-            ),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios_outlined,
+            color: kSecondaryColor,
           ),
         ),
       ),

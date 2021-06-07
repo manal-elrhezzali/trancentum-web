@@ -100,72 +100,73 @@ class _MobileBodyState extends State<MobileBody> {
 
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
     return Center(
       child: SingleChildScrollView(
         padding: EdgeInsets.all(defaultPadding * 2),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  //status
-                  SectionTitle(title: "Status Expeditions"),
-                  SizedBox(height: defaultPadding),
-                  //package status header
-                  PackageStatusInfoCardGridView(
-                    demoMyPackages: demoMyPackages,
-                    tapHandler: () {},
-                    crossAxisCount: 1,
-                  ),
-                  SizedBox(height: defaultPadding),
-                  SectionTitle(title: "Expeditions Consultées"),
-
-                  SizedBox(height: defaultPadding),
-                  //expedition consultees
-                  RecentExpeditionCardGridView(
-                    childAspectRatio: 5,
-                    tapHandler: () {},
-                    crossAxisCount: 1,
-                    demoRecentExpeditions: demoRecentExpeditions,
-                    showAll: showAllRecentPackages,
-                  ),
-                  SizedBox(height: defaultPadding),
-                  //tout afficher button
-                  ShowOrReduceButton(
-                    pressHandler: () {
-                      setState(() {
-                        showAllRecentPackages = !showAllRecentPackages;
-                      });
-                    },
-                    showAll: showAllRecentPackages,
-                  ),
-                ],
-              ),
+            //NOTIFICATIONS
+            NotificationsSection(
+              showAll: showAllNotifications,
+              pressHandler: () {
+                setState(() {
+                  showAllNotifications = !showAllNotifications;
+                });
+              },
             ),
-            SizedBox(width: defaultPadding),
-            Expanded(
-              child: Column(
-                children: [
-                  SectionTitle(title: "Graphe Expeditions"),
-                  SizedBox(height: defaultPadding),
-                  // expedition status chart
-                  ExpeditionsChart(
-                    pieChartSectionData: pieChartSectionData,
-                    totalOfExpeditions: 342,
-                  ),
-                  SizedBox(height: defaultPadding * 2),
-                  //NOTIFICATIONS
-                  NotificationsSection(
-                    showAll: showAllNotifications,
-                    pressHandler: () {
-                      setState(() {
-                        showAllNotifications = !showAllNotifications;
-                      });
-                    },
-                  ),
-                ],
-              ),
+            SizedBox(height: defaultPadding * 2),
+
+            //status
+            SectionTitle(title: "Status Expeditions"),
+            SizedBox(height: defaultPadding),
+            //package status header
+            PackageStatusInfoCardGridView(
+              demoMyPackages: demoMyPackages,
+              tapHandler: () {},
+              crossAxisCount: (_size.width < 518) ? 1 : 2,
+              childAspectRatio: (_size.width < 518)
+                  ? ((_size.width < 416) ? 3 : 4)
+                  : ((_size.width > 660)
+                      ? ((_size.width > 726) ? 3.5 : 3)
+                      : 2.5),
+            ),
+            SizedBox(height: defaultPadding * 2),
+            //Chart section
+            Column(
+              children: [
+                SectionTitle(title: "Graphe Expeditions"),
+                SizedBox(height: defaultPadding),
+                // expedition status chart
+                ExpeditionsChart(
+                  pieChartSectionData: pieChartSectionData,
+                  totalOfExpeditions: 342,
+                ),
+              ],
+            ),
+            SizedBox(height: defaultPadding * 2),
+
+            SectionTitle(title: "Expeditions Consultées"),
+            SizedBox(height: defaultPadding),
+
+            //expedition consultees
+            RecentExpeditionCardGridView(
+              childAspectRatio: 4,
+              tapHandler: () {},
+              crossAxisCount: (_size.width < 518) ? 1 : 2,
+              demoRecentExpeditions: demoRecentExpeditions,
+              showAll: showAllRecentPackages,
+            ),
+            SizedBox(height: defaultPadding),
+            //tout afficher button
+            ShowOrReduceButton(
+              pressHandler: () {
+                setState(() {
+                  showAllRecentPackages = !showAllRecentPackages;
+                });
+              },
+              showAll: showAllRecentPackages,
             ),
           ],
         ),

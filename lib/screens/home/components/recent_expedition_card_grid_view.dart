@@ -23,7 +23,7 @@ class RecentExpeditionCardGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: ScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
       itemCount: showAll
           ? demoRecentExpeditions.length
           : (demoRecentExpeditions.length ~/ 2), //dummy data

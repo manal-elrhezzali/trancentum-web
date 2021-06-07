@@ -15,6 +15,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkBgColor,
+      appBar: ResponsiveWidget.isMobileOrTablet(context)
+          ? AppBar(
+              backgroundColor: bgColor,
+              foregroundColor: kSecondaryColor,
+              bottom: TabBar(
+                isScrollable: true,
+                tabs: choices.map<Widget>((Choice choice) {
+                  return Tab(
+                    text: choice.title,
+                    icon: Icon(choice.icon),
+                  );
+                }).toList(),
+              ),
+            )
+          : null,
       body: SafeArea(
         child: ResponsiveWidget(
           mobile: MobileBody(),
@@ -35,3 +50,18 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+class Choice {
+  final String title;
+  final IconData icon;
+  const Choice({this.title, this.icon});
+}
+
+const List<Choice> choices = <Choice>[
+  Choice(title: "Dashboard", icon: Icons.dashboard),
+  Choice(title: "Compte", icon: Icons.account_circle_outlined),
+  Choice(title: "New Expedition", icon: Icons.inventory_2_outlined),
+  Choice(title: "Detail Expedition", icon: Icons.info_outline_rounded),
+  Choice(title: "Aide", icon: Icons.help_center_outlined),
+  Choice(title: "Déconnexion", icon: Icons.logout_outlined),
+];

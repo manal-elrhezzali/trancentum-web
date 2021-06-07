@@ -108,6 +108,7 @@ class _MobileBodyState extends State<MobileBody> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //TODO: ADD MENU TAB BAR
+            
             //NOTIFICATIONS
             NotificationsSection(
               showAll: showAllNotifications,

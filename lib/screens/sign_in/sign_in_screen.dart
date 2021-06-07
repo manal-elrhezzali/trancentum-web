@@ -12,7 +12,10 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: darkBgColor,
       body: SafeArea(
-        child: Body(),
+        child: Padding(
+          padding: const EdgeInsets.all(defaultPadding),
+          child: Body(),
+        ),
       ),
     );
   }

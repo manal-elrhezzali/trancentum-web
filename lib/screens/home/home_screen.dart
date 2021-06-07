@@ -13,41 +13,45 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: darkBgColor,
-      appBar: ResponsiveWidget.isMobileOrTablet(context)
-          ? AppBar(
-              backgroundColor: bgColor,
-              foregroundColor: kSecondaryColor,
-              bottom: TabBar(
-                isScrollable: true,
-                tabs: choices.map<Widget>((Choice choice) {
-                  return Tab(
-                    text: choice.title,
-                    icon: Icon(choice.icon),
-                  );
-                }).toList(),
+    return ResponsiveWidget.isMobileOrTablet(context)
+        ? DefaultTabController(
+            length: choices.length,
+            child: Scaffold(
+              backgroundColor: darkBgColor,
+              appBar: AppBar(
+                backgroundColor: bgColor,
+                bottom: TabBar(
+                  tabs: choices.map<Widget>((Choice choice) {
+                    return 
+                    Tab(
+                      text: choice.title,
+                      icon: Icon(choice.icon),
+                    );
+                  }).toList(),
+                ),
               ),
-            )
-          : null,
-      body: SafeArea(
-        child: ResponsiveWidget(
-          mobile: MobileBody(),
-          desktop: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //side menu
-              Expanded(child: SideMenu()),
-              //home body
-              Expanded(
-                flex: 5,
-                child: DesktopBody(),
+              body: SafeArea(
+                child: MobileBody(),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          )
+        : Scaffold(
+            backgroundColor: darkBgColor,
+            body: SafeArea(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //side menu
+                  Expanded(child: SideMenu()),
+                  //home body
+                  Expanded(
+                    flex: 5,
+                    child: DesktopBody(),
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 }
 

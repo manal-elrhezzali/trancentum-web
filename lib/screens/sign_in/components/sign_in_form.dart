@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/components/no_account_button.dart';
 import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
+import 'package:trancentum_web_app/screens/home/home_screen.dart';
 
 import '../../../constants.dart';
 
@@ -113,7 +114,9 @@ class _SignInFormState extends State<SignInForm> {
               height: 50,
               width: double.infinity,
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(HomeScreen.routeName);
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 color: redColor,

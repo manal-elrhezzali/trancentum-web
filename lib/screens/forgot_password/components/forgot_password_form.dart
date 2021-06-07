@@ -1,28 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/components/no_account_button.dart';
+import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
 import '../../../constants.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({Key key}) : super(key: key);
 
-  InkWell buildContactUsButton() {
-    return InkWell(
-      mouseCursor: SystemMouseCursors.click,
-      onTap: () {
-                ///////////////////////
-                ///////////////////////
-
-      },
-      child: Text(
-        "Contactez-nous",
-        style: TextStyle(
-          decoration: TextDecoration.underline,
-          color: redColor,
-          fontSize: 18,
-        ),
-      ),
-    );
-  }
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -57,11 +41,7 @@ class ForgotPasswordForm extends StatelessWidget {
             width: double.infinity,
             child: FlatButton(
               onPressed: () {
-                ///////////////////////
-                ///////////////////////
-                ///
-                ///////////////////////
-                ///
+                Navigator.of(context).pushNamed(OtpScreen.routeName);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -88,12 +68,16 @@ class ForgotPasswordForm extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              if (_size.width > 392) buildContactUsButton(),
+              if (_size.width > 392)
+                NoAccountButton(),
             ],
           ),
-          if (_size.width < 392) buildContactUsButton(),
+          if (_size.width < 392)
+            NoAccountButton(),
         ],
       ),
     );
   }
 }
+
+

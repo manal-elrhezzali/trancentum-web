@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
 
 import '../../../constants.dart';
 import '../../../responsive_widget.dart';
@@ -93,7 +94,7 @@ class Body extends StatelessWidget {
                 Theme.of(context).textTheme.headline6.copyWith(color: redColor),
           ),
           onEnd: () {
-            // Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
+            Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
           },
         ),
       ],

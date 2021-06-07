@@ -10,33 +10,30 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      child: ResponsiveWidget(
-        mobile: Container(
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  "assets/images/logo_trancentum_without_bg.png",
-                  width: 150,
-                  height: 150,
-                ),
-                SizedBox(height: defaultPadding * 3),
-                SignInForm(),
-                Spacer(),
-              ],
-            ),
-          ),
-        ),
-        desktop: Column(
+    return ResponsiveWidget(
+      mobile: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Header(),
-            Spacer(),
+            Image.asset(
+              "assets/images/logo_trancentum_without_bg.png",
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(height: defaultPadding * 3),
             SignInForm(),
-            Spacer(flex: 2),
+            Spacer(),
           ],
         ),
+      ),
+      desktop: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Header(),
+          Spacer(),
+          SignInForm(),
+          Spacer(flex: 2),
+        ],
       ),
     );
   }

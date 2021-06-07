@@ -12,59 +12,58 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(2 * defaultPadding),
-      child: ResponsiveWidget(
-        mobile: Container(
-          //mobile
-          child: Text("OOps i am mobile design"),
-        ),
-        desktop: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: SvgPicture.asset(
-                "assets/icons/Forgot Password.svg",
-                width: double.infinity,
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ResponsiveWidget.isDesktop(context)
+              ? Expanded(
+                  child: SvgPicture.asset(
+                    "assets/icons/Forgot Password.svg",
                     width: double.infinity,
-                    padding: EdgeInsets.all(2 * defaultPadding),
-                    child: Text(
-                      "Mot de passe oublié ?",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4
-                          .copyWith(color: reallyWhiteColor),
-                    ),
                   ),
-                  SizedBox(height: defaultPadding),
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      "Veuillez entrer votre numéro de téléphone et nous \n vous enverrons votre mot de passe par message ",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      maxLines: 3,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .copyWith(color: whiteColor),
-                    ),
+                )
+              : SizedBox(
+                  width: null,
+                  height: null,
+                ),
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(2 * defaultPadding),
+                  child: Text(
+                    "Mot de passe oublié ?",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    maxLines: 3,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .copyWith(color: reallyWhiteColor),
                   ),
-                  Spacer(),
-                  ForgotPasswordForm(),
-                  Spacer(flex: 2),
-                ],
-              ),
+                ),
+                SizedBox(height: defaultPadding),
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    "Veuillez entrer votre numéro de téléphone et nous \n vous enverrons votre mot de passe par message ",
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    maxLines: 5,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(color: whiteColor),
+                  ),
+                ),
+                Spacer(),
+                ForgotPasswordForm(),
+                Spacer(flex: 2),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

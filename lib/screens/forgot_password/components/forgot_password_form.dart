@@ -5,8 +5,27 @@ import '../../../constants.dart';
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({Key key}) : super(key: key);
 
+  InkWell buildContactUsButton() {
+    return InkWell(
+      mouseCursor: SystemMouseCursors.click,
+      onTap: () {
+                ///////////////////////
+                ///////////////////////
+
+      },
+      child: Text(
+        "Contactez-nous",
+        style: TextStyle(
+          decoration: TextDecoration.underline,
+          color: redColor,
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
     var underlineInputBorder = UnderlineInputBorder(
       borderSide: BorderSide(
         color: bgColor,
@@ -37,7 +56,13 @@ class ForgotPasswordForm extends StatelessWidget {
             height: 50,
             width: double.infinity,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                ///////////////////////
+                ///////////////////////
+                ///
+                ///////////////////////
+                ///
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               color: redColor,
@@ -63,19 +88,10 @@ class ForgotPasswordForm extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              InkWell(
-                onTap: () {},
-                child: Text(
-                  "Contactez-nous",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: redColor,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+              if (_size.width > 392) buildContactUsButton(),
             ],
           ),
+          if (_size.width < 392) buildContactUsButton(),
         ],
       ),
     );

@@ -47,7 +47,16 @@ class NotificationsSection extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      //delete the notification
+                      //TODO: show a dialog(with blur background) when user clicks on notification trash icon
+                      // return new BackdropFilter(
+                      //     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      //     child: Dialog(
+                      //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                      //       backgroundColor: Color(ColorResources.BLACK_ALPHA_65),
+                      //       child: _dialogContent(),
+                      //     )
+                      // );
+                      //Widget _dialogContent() {}
                     },
                     icon: Icon(
                       Icons.delete_forever_outlined,

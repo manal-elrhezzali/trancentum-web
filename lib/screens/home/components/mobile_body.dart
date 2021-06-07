@@ -107,6 +107,7 @@ class _MobileBodyState extends State<MobileBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //TODO: ADD MENU TAB BAR
             //NOTIFICATIONS
             NotificationsSection(
               showAll: showAllNotifications,
@@ -146,10 +147,8 @@ class _MobileBodyState extends State<MobileBody> {
               ],
             ),
             SizedBox(height: defaultPadding * 2),
-
             SectionTitle(title: "Expeditions Consultées"),
             SizedBox(height: defaultPadding),
-
             //expedition consultees
             RecentExpeditionCardGridView(
               childAspectRatio: 4,
@@ -174,14 +173,5 @@ class _MobileBodyState extends State<MobileBody> {
     );
   }
 }
-//TODO : show a dialog(with blur background) when user clicks on notification trash icon
-// return new BackdropFilter(
-//     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-//     child: Dialog(
-//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-//       backgroundColor: Color(ColorResources.BLACK_ALPHA_65),
-//       child: _dialogContent(),
-//     )
-// );
-//Widget _dialogContent() {}
+
 

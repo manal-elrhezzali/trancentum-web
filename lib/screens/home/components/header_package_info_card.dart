@@ -18,6 +18,7 @@ class HeaderPackageInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      mouseCursor: SystemMouseCursors.click,
       onTap: tapHandler,
       child: Card(
         color: bgColor,

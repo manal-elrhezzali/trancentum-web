@@ -12,7 +12,9 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkBgColor,
-      body: SafeArea(child: Body()),
+      body: SafeArea(
+        child: Body(),
+      ),
     );
   }
 }

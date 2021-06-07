@@ -5,8 +5,26 @@ import '../../../constants.dart';
 class OtpForm extends StatelessWidget {
   const OtpForm({Key key}) : super(key: key);
 
+  InkWell buildResendOtpCodeButton() {
+    return InkWell(
+      onTap: () {
+        //resend otp code
+      },
+      child: Text(
+        "Renvoyez le code",
+        style: TextStyle(
+          decoration: TextDecoration.underline,
+          color: redColor,
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
+
     var underlineInputBorder = UnderlineInputBorder(
       borderSide: BorderSide(
         color: bgColor,
@@ -63,21 +81,10 @@ class OtpForm extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              InkWell(
-                onTap: () {
-                  //resend otp code
-                },
-                child: Text(
-                  "Renvoyez le code",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: redColor,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+              if (_size.width > 430) buildResendOtpCodeButton(),
             ],
           ),
+          if (_size.width < 430) buildResendOtpCodeButton(),
         ],
       ),
     );

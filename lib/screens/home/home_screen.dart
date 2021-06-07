@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/components/mobile_and_tablet_tab_bar_menu.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/models/side_menu_choice.dart';
 import 'package:trancentum_web_app/responsive_widget.dart';
 
 import '../../constants.dart';
@@ -15,27 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget.isMobileOrTablet(context)
-        ? DefaultTabController(
-            length: choices.length,
-            child: Scaffold(
-              backgroundColor: darkBgColor,
-              appBar: AppBar(
-                backgroundColor: bgColor,
-                bottom: TabBar(
-                  tabs: choices.map<Widget>((SideMenuChoice choice) {
-                    return 
-                    Tab(
-                      text: choice.title,
-                      icon: Icon(choice.icon),
-                    );
-                  }).toList(),
-                ),
-              ),
-              body: SafeArea(
-                child: MobileBody(),
-              ),
-            ),
-          )
+        ? MobileAndTabletTabBarMenu(body: MobileBody())
         : Scaffold(
             backgroundColor: darkBgColor,
             body: SafeArea(
@@ -55,4 +35,5 @@ class HomeScreen extends StatelessWidget {
           );
   }
 }
+
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
+import 'package:trancentum_web_app/models/side_menu_choice.dart';
 import 'package:trancentum_web_app/responsive_widget.dart';
 
 import '../../constants.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: bgColor,
                 bottom: TabBar(
-                  tabs: choices.map<Widget>((Choice choice) {
+                  tabs: choices.map<Widget>((SideMenuChoice choice) {
                     return 
                     Tab(
                       text: choice.title,
@@ -55,17 +56,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class Choice {
-  final String title;
-  final IconData icon;
-  const Choice({this.title, this.icon});
-}
-
-const List<Choice> choices = <Choice>[
-  Choice(title: "Dashboard", icon: Icons.dashboard),
-  Choice(title: "Compte", icon: Icons.account_circle_outlined),
-  Choice(title: "New Expedition", icon: Icons.inventory_2_outlined),
-  Choice(title: "Detail Expedition", icon: Icons.info_outline_rounded),
-  Choice(title: "Aide", icon: Icons.help_center_outlined),
-  Choice(title: "Déconnexion", icon: Icons.logout_outlined),
-];

@@ -52,3 +52,9 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: greyColor),
   );
 }
+
+ const underlineInputBorder = UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: bgColor,
+      ),
+    );

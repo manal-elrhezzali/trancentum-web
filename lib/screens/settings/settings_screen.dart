@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:trancentum_web_app/components/side_menu.dart';
+
 import '../../constants.dart';
 import '../../responsive_widget.dart';
 import 'components/body.dart';
 
-class NewExpeditionScreen extends StatelessWidget {
-  static String routeName = "/new-expedition";
-  const NewExpeditionScreen({Key key}) : super(key: key);
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key key}) : super(key: key);
+  static String routeName = "/settings";
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
-      mobile: SafeArea(child: Body(),),
+      mobile: SafeArea(child: Body()),
       desktop: Scaffold(
         backgroundColor: darkBgColor,
         body: SafeArea(

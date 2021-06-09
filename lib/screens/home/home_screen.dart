@@ -5,7 +5,6 @@ import 'package:trancentum_web_app/responsive_widget.dart';
 
 import '../../constants.dart';
 import 'components/desktop_body.dart';
-import 'components/mobile_body.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/home";
@@ -35,5 +34,3 @@ class HomeScreen extends StatelessWidget {
           );
   }
 }
-
-

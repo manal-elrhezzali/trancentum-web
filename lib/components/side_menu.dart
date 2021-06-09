@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/screens/home/home_screen.dart';
 import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
-import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
+import 'package:trancentum_web_app/screens/settings/settings_screen.dart';
 
 import '../constants.dart';
 import 'side_menu_item.dart';
@@ -17,8 +17,7 @@ class _SideMenuState extends State<SideMenu> {
   bool showDashboardText = false;
   bool showAccountText = false;
   bool showNewPackageText = false;
-  bool showHelpCenterText = false;
-  bool showLogoutText = false;
+  bool showSettingsText = false;
   bool showPackageDEtailText = false;
 
   @override
@@ -47,8 +46,7 @@ class _SideMenuState extends State<SideMenu> {
                   showNewPackageText = false;
                   showDashboardText = !showDashboardText;
                   showAccountText = false;
-                  showHelpCenterText = false;
-                  showLogoutText = false;
+                  showSettingsText = false;
                   showPackageDEtailText = false;
                 });
                 Navigator.of(context).pushNamed(HomeScreen.routeName);
@@ -66,8 +64,7 @@ class _SideMenuState extends State<SideMenu> {
                   showNewPackageText = false;
                   showDashboardText = false;
                   showAccountText = !showAccountText;
-                  showHelpCenterText = false;
-                  showLogoutText = false;
+                  showSettingsText = false;
                   showPackageDEtailText = false;
                 });
               },
@@ -83,8 +80,7 @@ class _SideMenuState extends State<SideMenu> {
                   showNewPackageText = !showNewPackageText;
                   showDashboardText = false;
                   showAccountText = false;
-                  showHelpCenterText = false;
-                  showLogoutText = false;
+                  showSettingsText = false;
                   showPackageDEtailText = false;
                 });
                 Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
@@ -101,47 +97,63 @@ class _SideMenuState extends State<SideMenu> {
                   showNewPackageText = false;
                   showDashboardText = false;
                   showAccountText = false;
-                  showHelpCenterText = false;
-                  showLogoutText = false;
+                  showSettingsText = false;
                   showPackageDEtailText = !showPackageDEtailText;
                 });
               },
             ),
             SizedBox(height: defaultPadding),
-            //aide
+            //parametres
             SideMenuItem(
-              showText: showHelpCenterText,
-              icon: Icons.help_center_outlined,
-              text: "Aide",
+              showText: showSettingsText,
+              icon: Icons.settings,
+              text: "Paramètres",
               pressHandler: () {
                 setState(() {
                   showNewPackageText = false;
                   showDashboardText = false;
                   showAccountText = false;
-                  showHelpCenterText = !showHelpCenterText;
-                  showLogoutText = false;
+                  showSettingsText = !showSettingsText;
                   showPackageDEtailText = false;
                 });
+                Navigator.of(context).pushNamed(SettingsScreen.routeName);
               },
             ),
-            SizedBox(height: defaultPadding),
-            //logout
-            SideMenuItem(
-              showText: showLogoutText,
-              icon: Icons.logout_outlined,
-              text: "Déconnexion",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = false;
-                  showDashboardText = false;
-                  showAccountText = false;
-                  showHelpCenterText = false;
-                  showLogoutText = !showLogoutText;
-                  showPackageDEtailText = false;
-                });
-                Navigator.of(context).pushNamed(SignInScreen.routeName);
-              },
-            ),
+
+            // //aide
+            // SideMenuItem(
+            //   showText: showHelpCenterText,
+            //   icon: Icons.help_center_outlined,
+            //   text: "Aide",
+            //   pressHandler: () {
+            //     setState(() {
+            //       showNewPackageText = false;
+            //       showDashboardText = false;
+            //       showAccountText = false;
+            //       showHelpCenterText = !showHelpCenterText;
+            //       showLogoutText = false;
+            //       showPackageDEtailText = false;
+            //     });
+            //   },
+            // ),
+            // SizedBox(height: defaultPadding),
+            // //logout
+            // SideMenuItem(
+            //   showText: showLogoutText,
+            //   icon: Icons.logout_outlined,
+            //   text: "Déconnexion",
+            //   pressHandler: () {
+            //     setState(() {
+            //       showNewPackageText = false;
+            //       showDashboardText = false;
+            //       showAccountText = false;
+            //       showHelpCenterText = false;
+            //       showLogoutText = !showLogoutText;
+            //       showPackageDEtailText = false;
+            //     });
+            //     Navigator.of(context).pushNamed(SignInScreen.routeName);
+            //   },
+            // ),
           ],
         ),
       ),

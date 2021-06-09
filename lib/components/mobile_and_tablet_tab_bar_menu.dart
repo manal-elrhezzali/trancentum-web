@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/screens/home/components/mobile_body.dart';
 import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
+import 'package:trancentum_web_app/screens/settings/settings_screen.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../constants.dart';
@@ -39,15 +40,21 @@ class _MobileAndTabletTabBarMenuState extends State<MobileAndTabletTabBarMenu> {
         "icon": Icons.info_outline_rounded,
       },
       {
-        "page": NewExpeditionScreen(),
-        "title": "Aide",
-        "icon": Icons.help_center_outlined,
+        "page": SettingsScreen(),
+        "title": "Paramètres",
+        "icon": Icons.settings,
       },
-      {
-        "page": SignInScreen(),
-        "title": "Déconnexion",
-        "icon": Icons.logout_outlined,
-      },
+
+      // {
+      //   "page": NewExpeditionScreen(),
+      //   "title": "Aide",
+      //   "icon": Icons.help_center_outlined,
+      // },
+      // {
+      //   "page": SignInScreen(),
+      //   "title": "Déconnexion",
+      //   "icon": Icons.logout_outlined,
+      // },
     ];
     super.initState();
   }
@@ -83,7 +90,6 @@ class _MobileAndTabletTabBarMenuState extends State<MobileAndTabletTabBarMenu> {
             }).toList(),
           ),
         ),
-       
         body: _pages[_selectedPageIndex]["page"],
       ),
     );

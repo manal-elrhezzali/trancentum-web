@@ -5,7 +5,8 @@ import '../constants.dart';
 
 class MobileAndTabletTabBarMenu extends StatelessWidget {
   const MobileAndTabletTabBarMenu({
-    Key key, @required this.body,
+    Key key,
+    @required this.body,
   }) : super(key: key);
   final Widget body;
 
@@ -22,7 +23,9 @@ class MobileAndTabletTabBarMenu extends StatelessWidget {
             // isScrollable: true,
             tabs: choices.map<Widget>((SideMenuChoice choice) {
               return Tab(
-                text: choice.title,
+                text: (MediaQuery.of(context).size.width >= 775)
+                    ? choice.title
+                    : null,
                 icon: Icon(choice.icon),
               );
             }).toList(),

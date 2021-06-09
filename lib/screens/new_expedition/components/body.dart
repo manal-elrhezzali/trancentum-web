@@ -121,68 +121,145 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: defaultPadding),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        // height: 500,
-                        color: darkBgColor,
-                        child: buildSubForm(
-                          "Destinataire",
-                          [
-                            DefaultTextField(
-                              labelText: "Nom Destinataire",
+                ResponsiveWidget.isDesktop(context)
+                    ? Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              // height: 500,
+                              color: darkBgColor,
+                              child: buildSubForm(
+                                "Destinataire",
+                                [
+                                  DefaultTextField(
+                                    labelText: "Nom Destinataire",
+                                  ),
+                                  SizedBox(height: defaultPadding),
+                                  DefaultTextField(
+                                    labelText: "Tel Destinataire",
+                                  ),
+                                  SizedBox(height: defaultPadding),
+                                  DropDownButton(
+                                    hintText: "Ville Destinataire",
+                                    dropDownItems:
+                                        listItemsVilleDestinataireDropDownButton,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(height: defaultPadding),
-                            DefaultTextField(
-                              labelText: "Tel Destinataire",
-                            ),
-                            SizedBox(height: defaultPadding),
-                            DropDownButton(
-                              hintText: "Ville Destinataire",
-                              dropDownItems:
-                                  listItemsVilleDestinataireDropDownButton,
+                            Container(
+                              width: double.infinity,
+                              color: darkBgColor,
+                              child: buildSubForm(
+                                "Règlement",
+                                [
+                                  DefaultTextField(
+                                    labelText: "Nombre Colis",
+                                  ),
+                                  SizedBox(height: defaultPadding),
+                                  DropDownButton(
+                                    hintText: "Type Marchandise",
+                                    dropDownItems:
+                                        listItemsTypeMarchandiseDropDownButton,
+                                  ),
+                                  SizedBox(height: defaultPadding),
+                                  DropDownButton(
+                                    hintText: "Mode Paiement",
+                                    dropDownItems:
+                                        listItemsModePaiementDropDownButton,
+                                  ),
+                                  SizedBox(height: defaultPadding),
+                                  DropDownButton(
+                                    hintText: "Type Taxation",
+                                    dropDownItems:
+                                        listItemsTypeTaxationDropDownButton,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
+                      )
+                    : SizedBox(
+                        height: 0,
+                        width: 0,
                       ),
-                      SizedBox(height: defaultPadding),
-                      Container(
-                        width: double.infinity,
-                        color: darkBgColor,
-                        child: buildSubForm(
-                          "Règlement",
-                          [
-                            DefaultTextField(
-                              labelText: "Nombre Colis",
-                            ),
-                            SizedBox(height: defaultPadding),
-                            DropDownButton(
-                              hintText: "Type Marchandise",
-                              dropDownItems:
-                                  listItemsTypeMarchandiseDropDownButton,
-                            ),
-                            SizedBox(height: defaultPadding),
-                            DropDownButton(
-                              hintText: "Mode Paiement",
-                              dropDownItems:
-                                  listItemsModePaiementDropDownButton,
-                            ),
-                            SizedBox(height: defaultPadding),
-                            DropDownButton(
-                              hintText: "Type Taxation",
-                              dropDownItems:
-                                  listItemsTypeTaxationDropDownButton,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
+            ResponsiveWidget.isMobileOrTablet(context)
+                ? SizedBox(height: defaultPadding)
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
+            ResponsiveWidget.isMobileOrTablet(context)
+                ? Container(
+                    width: double.infinity,
+                    // height: 500,
+                    color: darkBgColor,
+                    child: buildSubForm(
+                      "Destinataire",
+                      [
+                        DefaultTextField(
+                          labelText: "Nom Destinataire",
+                        ),
+                        SizedBox(height: defaultPadding),
+                        DefaultTextField(
+                          labelText: "Tel Destinataire",
+                        ),
+                        SizedBox(height: defaultPadding),
+                        DropDownButton(
+                          hintText: "Ville Destinataire",
+                          dropDownItems:
+                              listItemsVilleDestinataireDropDownButton,
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
+            ResponsiveWidget.isMobileOrTablet(context)
+                ? SizedBox(height: defaultPadding)
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
+            ResponsiveWidget.isMobileOrTablet(context)
+                ? Container(
+                    width: double.infinity,
+                    color: darkBgColor,
+                    child: buildSubForm(
+                      "Règlement",
+                      [
+                        DefaultTextField(
+                          labelText: "Nombre Colis",
+                        ),
+                        SizedBox(height: defaultPadding),
+                        DropDownButton(
+                          hintText: "Type Marchandise",
+                          dropDownItems: listItemsTypeMarchandiseDropDownButton,
+                        ),
+                        SizedBox(height: defaultPadding),
+                        DropDownButton(
+                          hintText: "Mode Paiement",
+                          dropDownItems: listItemsModePaiementDropDownButton,
+                        ),
+                        SizedBox(height: defaultPadding),
+                        DropDownButton(
+                          hintText: "Type Taxation",
+                          dropDownItems: listItemsTypeTaxationDropDownButton,
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 0,
+                    width: 0,
+                  ),
             SizedBox(height: defaultPadding * 2),
             Container(
               padding: EdgeInsets.all(defaultPadding / 2),

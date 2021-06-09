@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/home/home_screen.dart';
+import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
+import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../constants.dart';
 import 'side_menu_item.dart';
@@ -48,6 +51,7 @@ class _SideMenuState extends State<SideMenu> {
                   showLogoutText = false;
                   showPackageDEtailText = false;
                 });
+                Navigator.of(context).pushNamed(HomeScreen.routeName);
               },
             ),
 
@@ -83,6 +87,7 @@ class _SideMenuState extends State<SideMenu> {
                   showLogoutText = false;
                   showPackageDEtailText = false;
                 });
+                Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
               },
             ),
             SizedBox(height: defaultPadding),
@@ -134,6 +139,7 @@ class _SideMenuState extends State<SideMenu> {
                   showLogoutText = !showLogoutText;
                   showPackageDEtailText = false;
                 });
+                Navigator.of(context).pushNamed(SignInScreen.routeName);
               },
             ),
           ],

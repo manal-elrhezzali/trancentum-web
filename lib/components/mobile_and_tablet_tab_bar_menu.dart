@@ -31,9 +31,10 @@ class MobileAndTabletTabBarMenu extends StatelessWidget {
             }).toList(),
           ),
         ),
-        body: SafeArea(
-          child: body,
-        ),
+        // body: SafeArea(
+        //   child: body,
+        // ),
+        body: body,
       ),
     );
   }

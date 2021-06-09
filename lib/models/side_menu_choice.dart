@@ -1,9 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/home/home_screen.dart';
+import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
+import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 class SideMenuChoice {
   final String title;
   final IconData icon;
   const SideMenuChoice({this.title, this.icon});
+}
+
+class SideMenuChoicePage {
+  const SideMenuChoicePage({Key key, this.choice, this.context});
+  final SideMenuChoice choice;
+  final BuildContext context;
+  DisplayPage(SideMenuChoice choice, BuildContext context) {
+    switch (choice.title) {
+      case "Dashboard":
+        return Navigator.of(context).pushNamed(HomeScreen.routeName);
+        break;
+      case "Compte":
+        return Navigator.of(context).pushNamed(HomeScreen.routeName);
+        break;
+      case "New Expedition":
+        return Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
+        break;
+      case "Detail Expedition":
+        return Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
+        break;
+      case "Aide":
+        return Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
+        break;
+      case "Déconnexion":
+        return Navigator.of(context).pushNamed(SignInScreen.routeName);
+        break;
+    }
+    ;
+  }
 }
 
 const List<SideMenuChoice> choices = <SideMenuChoice>[

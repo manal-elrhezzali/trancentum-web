@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: SignInScreen(),
+      home: NewExpeditionScreen(),
       routes: routes,
     );
   }

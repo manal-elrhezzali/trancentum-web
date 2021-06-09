@@ -66,7 +66,6 @@ class Body extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        // height: 500,
                         color: darkBgColor,
                         child: buildSubForm(
                           "Expediteur",
@@ -89,10 +88,34 @@ class Body extends StatelessWidget {
                       ),
                       SizedBox(height: defaultPadding),
                       Container(
-                        child: Text("I am retours fonds Container"),
                         width: double.infinity,
-                        height: 500,
-                        color: primaryColor,
+                        color: darkBgColor,
+                        child: buildSubForm(
+                          "Retours de fonds",
+                          [
+                            DefaultTextField(
+                              labelText: "Nombre Bons livraison",
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DefaultTextField(
+                              labelText: "Nombre Factures",
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DefaultTextField(
+                              labelText: "Montant",
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DefaultTextField(
+                              labelText: "Nombre",
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DropDownButton(
+                              hintText: "Type de retours",
+                              dropDownItems:
+                                  listItemsRetoursFondsDropDownButton,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -126,10 +149,34 @@ class Body extends StatelessWidget {
                       ),
                       SizedBox(height: defaultPadding),
                       Container(
-                        child: Text("I am reglement Container"),
                         width: double.infinity,
-                        height: 500,
-                        color: primaryColor,
+                        color: darkBgColor,
+                        child: buildSubForm(
+                          "Règlement",
+                          [
+                            DefaultTextField(
+                              labelText: "Nombre Colis",
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DropDownButton(
+                              hintText: "Type Marchandise",
+                              dropDownItems:
+                                  listItemsTypeMarchandiseDropDownButton,
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DropDownButton(
+                              hintText: "Mode Paiement",
+                              dropDownItems:
+                                  listItemsModePaiementDropDownButton,
+                            ),
+                            SizedBox(height: defaultPadding),
+                            DropDownButton(
+                              hintText: "Type Taxation",
+                              dropDownItems:
+                                  listItemsTypeTaxationDropDownButton,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

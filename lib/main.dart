@@ -7,6 +7,7 @@ import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import 'package:trancentum_web_app/theme.dart';
+import 'components/mobile_and_tablet_tab_bar_menu.dart';
 import 'routes.dart';
 
 void main() {
@@ -32,8 +33,11 @@ class MyApp extends StatelessWidget {
       //   ],
       //   child: HomeScreen(),
       // ),
-      home: NewExpeditionScreen(),
+      home: SignInScreen(),
       routes: routes,
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => HomeScreen());
+      },
     );
   }
 }

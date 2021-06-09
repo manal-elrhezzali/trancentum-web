@@ -13,7 +13,7 @@ class NewExpeditionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
-      mobile: MobileAndTabletTabBarMenu(body: Body()),
+      mobile: Body(),
       desktop: Scaffold(
         backgroundColor: darkBgColor,
         body: SafeArea(

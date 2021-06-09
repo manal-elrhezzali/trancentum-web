@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/models/expedition.dart';
+import 'package:trancentum_web_app/data/dummy_expeditions.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
 import 'package:trancentum_web_app/screens/home/components/package_status_info_card_grid_view.dart';
 import 'package:trancentum_web_app/screens/home/components/show_or_Reduce_button.dart';

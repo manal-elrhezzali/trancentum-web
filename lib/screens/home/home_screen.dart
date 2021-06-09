@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget.isMobileOrTablet(context)
-        ? MobileAndTabletTabBarMenu(body: MobileBody())
+        ? MobileAndTabletTabBarMenu()
         : Scaffold(
             backgroundColor: darkBgColor,
             body: SafeArea(

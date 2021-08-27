@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 
 import '../../constants.dart';
-import '../../responsive_widget.dart';
+import '../../responsive.dart';
 import 'components/body.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveWidget(
+    return Responsive(
       mobile: SafeArea(child: Body()),
       desktop: Scaffold(
         backgroundColor: darkBgColor,

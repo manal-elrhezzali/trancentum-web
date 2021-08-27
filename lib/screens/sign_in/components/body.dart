@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/responsive.dart';
 
 import '../../../constants.dart';
-import '../../../responsive_widget.dart';
 import 'header.dart';
 import 'sign_in_form.dart';
 
@@ -10,7 +10,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveWidget(
+    return Responsive(
       mobile: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

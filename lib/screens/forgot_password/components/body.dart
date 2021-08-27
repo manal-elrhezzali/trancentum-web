@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
-import '../../../responsive_widget.dart';
+import '../../../responsive.dart';
 import 'forgot_password_form.dart';
 
 class Body extends StatelessWidget {
@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ResponsiveWidget.isDesktop(context)
+          Responsive.isDesktop(context)
               ? Expanded(
                   child: SvgPicture.asset(
                     "assets/icons/Forgot Password.svg",

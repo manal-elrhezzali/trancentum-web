@@ -1,161 +1,99 @@
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/screens/home/home_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
 import 'package:trancentum_web_app/screens/settings/settings_screen.dart';
+import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../constants.dart';
-import 'side_menu_item.dart';
 
-class SideMenu extends StatefulWidget {
-  const SideMenu({Key key}) : super(key: key);
-
-  @override
-  State<SideMenu> createState() => _SideMenuState();
-}
-
-class _SideMenuState extends State<SideMenu> {
-  bool showDashboardText = false;
-  bool showAccountText = false;
-  bool showNewPackageText = false;
-  bool showSettingsText = false;
-  bool showPackageDEtailText = false;
+class SideMenu extends StatelessWidget {
+  const SideMenu({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      elevation: 0,
-      child: Container(
-        padding: EdgeInsets.all(2 * defaultPadding),
-        color: darkBgColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
+      child: ListView(
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(color: bgColor),
+            child: Image.asset(
               "assets/images/logo_trancentum_without_bg.png",
-              width: 100,
-              height: 100,
             ),
-            SizedBox(height: defaultPadding * 2),
-            //dashboard
-            SideMenuItem(
-              showText: showDashboardText,
-              icon: Icons.dashboard,
-              text: "Dashboard",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = false;
-                  showDashboardText = !showDashboardText;
-                  showAccountText = false;
-                  showSettingsText = false;
-                  showPackageDEtailText = false;
-                });
-                Navigator.of(context).pushNamed(HomeScreen.routeName);
-              },
-            ),
+          ),
+          DrawerListTile(
+            title: "Dashboard",
+            iconSvg: "assets/icons/Menu Dashboard.svg",
+            press: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(DashboardScreen.routeName);
+            },
+          ),
+          DrawerListTile(
+            title: "Compte",
+            iconSvg: "assets/icons/User Icon.svg",
+            press: () {
+              //add navigator of ...
+            },
+          ),
+          DrawerListTile(
+            iconSvg: "assets/icons/Package.svg",
+            title: "Nouvelle Expedition",
+            press: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(NewExpeditionScreen.routeName);
+            },
+          ),
+          DrawerListTile(
+            iconSvg: "assets/icons/Question Mark.svg",
+            title: "Aide",
+            press: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(SettingsScreen.routeName);
+            },
+          ),
+          DrawerListTile(
+            iconSvg: "assets/icons/Log out.svg",
+            title: "Déconnexion",
+            press: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(SignInScreen.routeName);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-            SizedBox(height: defaultPadding),
-            //compte
-            SideMenuItem(
-              showText: showAccountText,
-              icon: Icons.account_circle_outlined,
-              text: "Compte",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = false;
-                  showDashboardText = false;
-                  showAccountText = !showAccountText;
-                  showSettingsText = false;
-                  showPackageDEtailText = false;
-                });
-              },
-            ),
-            SizedBox(height: defaultPadding),
-            //new package
-            SideMenuItem(
-              showText: showNewPackageText,
-              icon: Icons.inventory_2_outlined,
-              text: "New Expedition",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = !showNewPackageText;
-                  showDashboardText = false;
-                  showAccountText = false;
-                  showSettingsText = false;
-                  showPackageDEtailText = false;
-                });
-                Navigator.of(context).pushNamed(NewExpeditionScreen.routeName);
-              },
-            ),
-            SizedBox(height: defaultPadding),
-            //Expedition Detail
-            SideMenuItem(
-              showText: showPackageDEtailText,
-              icon: Icons.info_outline_rounded,
-              text: "Detail Expedition",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = false;
-                  showDashboardText = false;
-                  showAccountText = false;
-                  showSettingsText = false;
-                  showPackageDEtailText = !showPackageDEtailText;
-                });
-              },
-            ),
-            SizedBox(height: defaultPadding),
-            //parametres
-            SideMenuItem(
-              showText: showSettingsText,
-              icon: Icons.settings,
-              text: "Paramètres",
-              pressHandler: () {
-                setState(() {
-                  showNewPackageText = false;
-                  showDashboardText = false;
-                  showAccountText = false;
-                  showSettingsText = !showSettingsText;
-                  showPackageDEtailText = false;
-                });
-                Navigator.of(context).pushNamed(SettingsScreen.routeName);
-              },
-            ),
+class DrawerListTile extends StatelessWidget {
+  const DrawerListTile({
+    Key key,
+    // For selecting those three line once press "Command+D"
+    @required this.title,
+    @required this.iconSvg,
+    @required this.press,
+  }) : super(key: key);
 
-            // //aide
-            // SideMenuItem(
-            //   showText: showHelpCenterText,
-            //   icon: Icons.help_center_outlined,
-            //   text: "Aide",
-            //   pressHandler: () {
-            //     setState(() {
-            //       showNewPackageText = false;
-            //       showDashboardText = false;
-            //       showAccountText = false;
-            //       showHelpCenterText = !showHelpCenterText;
-            //       showLogoutText = false;
-            //       showPackageDEtailText = false;
-            //     });
-            //   },
-            // ),
-            // SizedBox(height: defaultPadding),
-            // //logout
-            // SideMenuItem(
-            //   showText: showLogoutText,
-            //   icon: Icons.logout_outlined,
-            //   text: "Déconnexion",
-            //   pressHandler: () {
-            //     setState(() {
-            //       showNewPackageText = false;
-            //       showDashboardText = false;
-            //       showAccountText = false;
-            //       showHelpCenterText = false;
-            //       showLogoutText = !showLogoutText;
-            //       showPackageDEtailText = false;
-            //     });
-            //     Navigator.of(context).pushNamed(SignInScreen.routeName);
-            //   },
-            // ),
-          ],
-        ),
+  final String title;
+  final String iconSvg;
+  final VoidCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: press,
+      horizontalTitleGap: 0.0,
+      leading: SvgPicture.asset(
+              iconSvg,
+              width: 16,
+              color: Colors.white54,
+            ),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.white54),
       ),
     );
   }

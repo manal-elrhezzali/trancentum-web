@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/components/no_account_button.dart';
+import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
-import 'package:trancentum_web_app/screens/home/home_screen.dart';
 
 import '../../../constants.dart';
 
@@ -37,7 +36,7 @@ class _SignInFormState extends State<SignInForm> {
                 fillColor: darkBgColor,
                 border: underlineInputBorder,
                 focusedBorder: underlineInputBorder,
-                labelText: "ICE",
+                labelText: "Email",
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
                 labelStyle: TextStyle(color: whiteColor),
                 // suffixIcon: Icon(
@@ -115,7 +114,7 @@ class _SignInFormState extends State<SignInForm> {
               width: double.infinity,
               child: FlatButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(HomeScreen.routeName);
+                  Navigator.of(context).pushNamed(DashboardScreen.routeName);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
@@ -142,21 +141,6 @@ class _SignInFormState extends State<SignInForm> {
                   ),
                 ),
               ),
-            // SizedBox(height: defaultPadding),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       "Vous n'avez pas de compte?",
-            //       style: TextStyle(
-            //         color: whiteColor,
-            //         fontSize: 18,
-            //       ),
-            //     ),
-            //     SizedBox(width: 10),
-            //     if (_size.width > 392) NoAccountButton(),
-            //   ],
-            // ),
           ],
         ),
       ),

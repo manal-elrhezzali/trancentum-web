@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
 
-ThemeData theme() {
+ThemeData theme(BuildContext context) {
   return ThemeData(
-    scaffoldBackgroundColor: reallyWhiteColor,
-    fontFamily: "RobotoCondensed",
-    appBarTheme: appBarTheme(),
-    textTheme: textTheme(),
-    // --------------------------
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    primarySwatch: Colors.blue,
+    // scaffoldBackgroundColor: darkBgColor,
+    // fontFamily: "RobotoCondensed",
+    // appBarTheme: appBarTheme(),
+    // textTheme: textTheme(),
+    // // --------------------------
+    // visualDensity: VisualDensity.adaptivePlatformDensity,
+    // primarySwatch: Colors.blue,
+
+    scaffoldBackgroundColor: bgColor,
+    textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+        .apply(bodyColor: Colors.white),
+    canvasColor: bgColor,
   );
 }
 
@@ -23,7 +29,7 @@ TextTheme textTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
-    color: reallyWhiteColor,
+    color: bgColor,
     elevation: 0,
     brightness: Brightness.light,
     iconTheme: IconThemeData(color: reallyWhiteColor),

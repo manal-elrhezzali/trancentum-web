@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
 
 import '../../../constants.dart';
-import '../../../responsive_widget.dart';
+import '../../../responsive.dart';
 import 'otp_form.dart';
 
 class Body extends StatelessWidget {
@@ -16,7 +16,7 @@ class Body extends StatelessWidget {
         padding: EdgeInsets.all(2 * defaultPadding),
         child: Row(
           children: [
-            ResponsiveWidget.isDesktop(context)
+            Responsive.isDesktop(context)
                 ? Expanded(
                     child: SvgPicture.asset(
                       "assets/icons/Otp Icon.svg",

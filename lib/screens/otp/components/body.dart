@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     child: Text(
-                      "We sent a 4-digit code to +212 676 175 *** ",
+                      "We sent a 6-digit code to your email",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       maxLines: 3,
@@ -82,11 +82,11 @@ class Body extends StatelessWidget {
         ),
         TweenAnimationBuilder(
           tween: Tween(
-            begin: 30.0,
+            begin: 50.0,
             end: 0,
           ),
           duration: Duration(
-            seconds: 30,
+            seconds: 50,
           ),
           builder: (context, value, child) => Text(
             "00:${value.toInt()}",

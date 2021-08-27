@@ -47,7 +47,7 @@ class Body extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Text(
-                    "Veuillez entrer votre numéro de téléphone et nous \n vous enverrons un code OTP par message ",
+                    "Veuillez entrer votre email et nous \n vous enverrons un code OTP par mail ",
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     maxLines: 5,

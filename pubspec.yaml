@@ -32,7 +32,9 @@ dependencies:
   #for sending and validating OTP
   email_auth: ^0.0.1
   #for sending mail to user
+  #not supported for web
   mailer: ^5.0.2
+  
   #flutter_mailer: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.

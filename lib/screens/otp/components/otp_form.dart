@@ -14,7 +14,8 @@ class OtpForm extends StatefulWidget {
 
 class _OtpFormState extends State<OtpForm> {
   String otpCode = "";
-  final _formKey = GlobalKey<FormState>();
+  	
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _verifyOTP(String email, String userOTP) async {
     var result = EmailAuth.validate(receiverMail: email, userOTP: userOTP);

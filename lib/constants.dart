@@ -29,6 +29,9 @@ const redColor = Color(0xFFFF6859);
 //add brown
 //add orange
 
+//regex patterns
+const String emailPattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 // Form Error
 //add ICE RegExp
 const String kIceNullError = "Please Enter your ICE";

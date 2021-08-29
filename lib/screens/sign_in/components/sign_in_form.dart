@@ -15,12 +15,12 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   bool rememberMeIsChecked = false;
   bool visibility = false;
-  final _formKey = GlobalKey<FormState>();
+  	
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Client user = new Client(email: "", password: "", id: "c4");
 
   final _passwordFocusNode = FocusNode();
-  var emailPattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  
   @override
   void dispose() {
     _passwordFocusNode.dispose();

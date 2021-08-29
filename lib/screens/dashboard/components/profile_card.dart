@@ -24,7 +24,7 @@ class ProfileCard extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            "/Users/mac/software_development/flutter_apps/trancentum_web_app/assets/images/profile_image_placeholder.png",
+            "assets/images/profile_image_placeholder.png",
             height: 38,
           ),
           if (!Responsive.isMobile(context))

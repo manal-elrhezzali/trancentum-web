@@ -14,7 +14,7 @@ class NoAccountButton extends StatelessWidget {
       onTap: () {
         ///////////////////////
         ///////////////////////
-        ///
+        ///redirect to trancentum's contact page
         
       },
       child: Text(

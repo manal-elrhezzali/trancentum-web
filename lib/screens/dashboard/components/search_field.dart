@@ -15,7 +15,7 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   	
-GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final _formKey = GlobalKey<FormState>();
 
   String searchFieldValue = "";
   void _saveForm() {

@@ -13,7 +13,6 @@ import 'providers/notifications.dart';
 import 'providers/retours_de_fonds.dart';
 import 'providers/villes.dart';
 import 'routes.dart';
-import 'screens/dashboard/dashboard_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,9 +60,9 @@ class MyApp extends StatelessWidget {
         ),
         home: SignInScreen(),
         routes: routes,
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(builder: (ctx) => DashboardScreen());
-        },
+        // onUnknownRoute: (settings) {
+        //   return MaterialPageRoute(builder: (ctx) => DashboardScreen());
+        // },
       ),
     );
   }

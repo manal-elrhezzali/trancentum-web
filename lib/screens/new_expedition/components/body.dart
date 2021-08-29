@@ -16,15 +16,23 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  //exepediteur/destinataire subform focus nodes
+  final _formKey = GlobalKey<FormState>();
   final _telExpediteurFocusNode = FocusNode();
   final _telDestinataireFocusNode = FocusNode();
 
-  //Retours de fonds subForm focus nodes
   final _nbrFacturesFocusNode = FocusNode();
   final _montantRetoursDeFondsFocusNode = FocusNode();
   final _nbrRetoursDeFondsFocusNode = FocusNode();
+  //////////
+  final _nomDestinataireFocusNode = FocusNode();
+  final _nbrDeBonsFocusNode = FocusNode();
+  final _nbrColisFocusNode = FocusNode();
+
+  final _villeExpediteurFocusNode = FocusNode();
+  final _villeDestinataireFocusNode = FocusNode();
+  final _typeDeRetoursFocusNode = FocusNode();
+  final _typeDeMarchandiseFocusNode = FocusNode();
+  final _modePaiementFocusNode = FocusNode();
 
   // List<Ville> villes = [];
 
@@ -127,13 +135,32 @@ class _BodyState extends State<Body> {
     );
   }
 
+  // @override
+  // void dispose() {
+  //   _telExpediteurFocusNode.dispose();
+  //   _telDestinataireFocusNode.dispose();
+  //   _nbrFacturesFocusNode.dispose();
+  //   _montantRetoursDeFondsFocusNode.dispose();
+  //   _nbrRetoursDeFondsFocusNode.dispose();
+  //   super.dispose();
+  // }
+
   @override
   void dispose() {
     _telExpediteurFocusNode.dispose();
+    _nomDestinataireFocusNode.dispose();
     _telDestinataireFocusNode.dispose();
     _nbrFacturesFocusNode.dispose();
     _montantRetoursDeFondsFocusNode.dispose();
     _nbrRetoursDeFondsFocusNode.dispose();
+    _nbrDeBonsFocusNode.dispose();
+    _nbrColisFocusNode.dispose();
+    _villeExpediteurFocusNode.dispose();
+    _villeDestinataireFocusNode.dispose();
+    _typeDeRetoursFocusNode.dispose();
+    _typeDeMarchandiseFocusNode.dispose();
+    _modePaiementFocusNode.dispose();
+
     super.dispose();
   }
 
@@ -258,6 +285,10 @@ class _BodyState extends State<Body> {
                                       focusNode: _telExpediteurFocusNode,
                                       onSaved: (newValue) =>
                                           telExpediteur = newValue,
+                                      onFieldSubmitted: (_) {
+                                        FocusScope.of(context).requestFocus(
+                                            _villeExpediteurFocusNode);
+                                      },
                                       textInputAction: TextInputAction.next,
                                       keyboardType: TextInputType.phone,
                                       validator: (value) {
@@ -305,6 +336,16 @@ class _BodyState extends State<Body> {
                                         ),
                                       ),
                                       child: DropdownButtonFormField(
+                                        onSaved:(newValue) {
+setState(() {
+                                            _initialValueVilleExpediteur =
+                                                newValue;
+                                                FocusScope.of(context).requestFocus(
+                                              _nbrDeBonsFocusNode);
+                                          });
+                                        },
+                                        focusNode: _villeExpediteurFocusNode,
+                                       
                                         value: _initialValueVilleExpediteur,
                                         hint: Text(
                                           'Ville Expediteur',
@@ -317,9 +358,6 @@ class _BodyState extends State<Body> {
                                           Icons.keyboard_arrow_down_rounded,
                                           color: kSecondaryColor,
                                         ),
-                                        onChanged: (newValue) => setState(() =>
-                                            _initialValueVilleExpediteur =
-                                                newValue),
                                         validator: (value) => value == null
                                             ? 'field required'
                                             : null,
@@ -338,8 +376,6 @@ class _BodyState extends State<Body> {
                                   ],
                                 ),
                               ),
-
-                             
                             ],
                           ),
                         ),
@@ -495,6 +531,7 @@ class _BodyState extends State<Body> {
                                   "Retours de fonds",
                                   [
                                     TextFormField(
+                                      focusNode: _nbrDeBonsFocusNode,
                                       onSaved: (newValue) =>
                                           nbrDeBonsLivraison = newValue,
                                       textInputAction: TextInputAction.next,
@@ -610,6 +647,10 @@ class _BodyState extends State<Body> {
                                         }
                                         return null;
                                       },
+                                      onFieldSubmitted: (_) {
+                                        FocusScope.of(context).requestFocus(
+                                            _typeDeRetoursFocusNode);
+                                      },
                                       style: TextStyle(color: whiteColor),
                                       decoration: InputDecoration(
                                         filled: true,
@@ -647,6 +688,15 @@ class _BodyState extends State<Body> {
                                         ),
                                       ),
                                       child: DropdownButtonFormField(
+                                        focusNode: _typeDeRetoursFocusNode,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            _initialValueTypeDeRetours =
+                                                newValue;
+                                          });
+                                          FocusScope.of(context).requestFocus(
+                                              _nomDestinataireFocusNode);
+                                        },
                                         value: _initialValueTypeDeRetours,
                                         hint: Text(
                                           "Type de retours",
@@ -659,9 +709,7 @@ class _BodyState extends State<Body> {
                                           Icons.keyboard_arrow_down_rounded,
                                           color: kSecondaryColor,
                                         ),
-                                        onChanged: (newValue) => setState(() =>
-                                            _initialValueTypeDeRetours =
-                                                newValue),
+
                                         validator: (value) => value == null
                                             ? 'field required'
                                             : null,
@@ -682,8 +730,6 @@ class _BodyState extends State<Body> {
                                   ],
                                 ),
                               ),
-
-                              
                             ],
                           ),
                         ),
@@ -709,6 +755,10 @@ class _BodyState extends State<Body> {
                                             return "Veuillez saisir le Nombre de Colis";
                                           }
                                           return null;
+                                        },
+                                        onFieldSubmitted: (_) {
+                                          FocusScope.of(context).requestFocus(
+                                              _typeDeMarchandiseFocusNode);
                                         },
                                         style: TextStyle(color: whiteColor),
                                         decoration: InputDecoration(
@@ -743,6 +793,9 @@ class _BodyState extends State<Body> {
                                           ),
                                         ),
                                         child: DropdownButtonFormField(
+                                          
+                                          focusNode:
+                                              _typeDeMarchandiseFocusNode,
                                           value: _initialValueTypeMarchandise,
                                           hint: Text(
                                             "Type Marchandise",
@@ -755,10 +808,15 @@ class _BodyState extends State<Body> {
                                             Icons.keyboard_arrow_down_rounded,
                                             color: kSecondaryColor,
                                           ),
-                                          onChanged: (newValue) => setState(
-                                              () =>
-                                                  _initialValueTypeMarchandise =
-                                                      newValue),
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _initialValueTypeMarchandise =
+                                                  newValue;
+                                            });
+                                            FocusScope.of(context).requestFocus(
+                                              _modePaiementFocusNode);
+                                          },
+
                                           validator: (value) => value == null
                                               ? 'field required'
                                               : null,
@@ -792,11 +850,17 @@ class _BodyState extends State<Body> {
                                           ),
                                         ),
                                         child: DropdownButtonFormField(
+                                          focusNode: _modePaiementFocusNode,
                                           value: _initialValueModePaiement,
                                           hint: Text(
                                             "Mode Paiement",
                                             style: TextStyle(color: whiteColor),
                                           ),
+                                          // onChanged: (newValue){
+                                          //   setState(() {
+                                              
+                                          //   });
+                                          // },
                                           dropdownColor: darkBgColor,
                                           isExpanded: true,
                                           // underline: SizedBox(),
@@ -1047,6 +1111,10 @@ class _BodyState extends State<Body> {
                                           }
                                           return null;
                                         },
+                                        onFieldSubmitted: (_) {
+                                          FocusScope.of(context).requestFocus(
+                                              _typeDeMarchandiseFocusNode);
+                                        },
                                         style: TextStyle(color: whiteColor),
                                         decoration: InputDecoration(
                                           filled: true,
@@ -1080,6 +1148,9 @@ class _BodyState extends State<Body> {
                                           ),
                                         ),
                                         child: DropdownButtonFormField(
+                                          
+                                          focusNode:
+                                              _typeDeMarchandiseFocusNode,
                                           value: _initialValueTypeMarchandise,
                                           hint: Text(
                                             "Type Marchandise",
@@ -1092,10 +1163,15 @@ class _BodyState extends State<Body> {
                                             Icons.keyboard_arrow_down_rounded,
                                             color: kSecondaryColor,
                                           ),
-                                          onChanged: (newValue) => setState(
-                                              () =>
-                                                  _initialValueTypeMarchandise =
-                                                      newValue),
+                                          onChanged: (newValue) {
+                                            setState(() {
+                                              _initialValueTypeMarchandise =
+                                                  newValue;
+                                            });
+                                            FocusScope.of(context).requestFocus(
+                                              _modePaiementFocusNode);
+                                          },
+
                                           validator: (value) => value == null
                                               ? 'field required'
                                               : null,
@@ -1129,11 +1205,17 @@ class _BodyState extends State<Body> {
                                           ),
                                         ),
                                         child: DropdownButtonFormField(
+                                          focusNode: _modePaiementFocusNode,
                                           value: _initialValueModePaiement,
                                           hint: Text(
                                             "Mode Paiement",
                                             style: TextStyle(color: whiteColor),
                                           ),
+                                          // onChanged: (newValue){
+                                          //   setState(() {
+                                              
+                                          //   });
+                                          // },
                                           dropdownColor: darkBgColor,
                                           isExpanded: true,
                                           // underline: SizedBox(),

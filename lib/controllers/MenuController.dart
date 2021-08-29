@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MenuController extends ChangeNotifier {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
 
   void controlMenu() {
@@ -10,3 +10,4 @@ class MenuController extends ChangeNotifier {
     }
   }
 }
+

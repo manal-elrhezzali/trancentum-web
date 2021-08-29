@@ -16,7 +16,7 @@ class _SignInFormState extends State<SignInForm> {
   bool rememberMeIsChecked = false;
   bool visibility = false;
   	
-GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final _formKey = GlobalKey<FormState>();
   Client user = new Client(email: "", password: "", id: "c4");
 
   final _passwordFocusNode = FocusNode();

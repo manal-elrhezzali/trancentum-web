@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
 import 'package:trancentum_web_app/providers/expeditions.dart';
-import 'package:trancentum_web_app/screens/no_result_found/no_result_found_screen.dart';
+import 'package:trancentum_web_app/screens/no_result_found_404/no_result_found_screen.dart';
 
 import '../../responsive.dart';
 import 'components/body.dart';

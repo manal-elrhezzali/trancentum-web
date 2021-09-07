@@ -101,7 +101,7 @@ class _DashboardContentState extends State<DashboardContent> {
                           ),
                           if (!Responsive.isMobile(context))
                             SizedBox(width: defaultPadding),
-                          if (!Responsive.isMobile(context))
+                          if (!Responsive.isMobile(context) && (_expeditionChargeeCount > 0) && (_expeditionClotureeCount > 0) && (_expeditionEnregistreeCount > 0) && (_expeditionLivreeCount > 0) && (_expeditionRecueCount > 0) && (_expeditionRetourCount > 0))
                             Expanded(
                               flex: 2,
                               child: AllPackagesStatus(

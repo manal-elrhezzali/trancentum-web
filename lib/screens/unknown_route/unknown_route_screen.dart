@@ -8,7 +8,7 @@ import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import '../../constants.dart';
 import '../../responsive.dart';
 
-class NoResultFoundScreen extends StatelessWidget {
+class UnknownRouteScreen extends StatelessWidget {
   static String routeName = "/page-not-found";
 
   @override
@@ -78,10 +78,12 @@ class NoResultFoundScreen extends StatelessWidget {
                         child: FlatButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacementNamed(
-                                DashboardScreen.routeName);//use dashboard instead
+                                DashboardScreen
+                                    .routeName); //use dashboard instead
                           },
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           color: redColor,
                           child: Text(
                             "Go to Dashboard",
@@ -114,7 +116,7 @@ class NoResultFoundScreen extends StatelessWidget {
                     ),
               SizedBox(
                 width: defaultPadding,
-              )
+              ),
             ],
           ),
         ),

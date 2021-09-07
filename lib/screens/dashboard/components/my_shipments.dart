@@ -117,7 +117,7 @@ class PackageStatusInfoCardGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
-      itemCount: myPackages.length, //dummy data
+      itemCount: myPackages.length, 
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,

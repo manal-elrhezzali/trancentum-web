@@ -8,8 +8,10 @@ import 'screens/expedition_detail/expedition_detail_screen.dart';
 import 'screens/forbidden_error_403_401/forbidden_error_screen.dart';
 import 'screens/forgot_password/forgot_pasword_screen.dart';
 import 'screens/mail_not_sent/mail_error_screen.dart';
+import 'screens/profile/profile_screen.dart';
 import 'screens/settings/settings_screen.dart';
 import 'screens/sign_in/sign_in_screen.dart';
+import 'screens/unknown_route/unknown_route_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SignInScreen.routeName: (context) => SignInScreen(),
@@ -19,11 +21,14 @@ final Map<String, WidgetBuilder> routes = {
   NewExpeditionScreen.routeName: (context) => NewExpeditionScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),
   ExpeditionDetailScreen.routeName: (context) => ExpeditionDetailScreen(),
+  ProfileScreen.routeName: (context) => ProfileScreen(),
+
 
   //error screens
   NoResultFoundScreen.routeName: (context) => NoResultFoundScreen(),
-  ForbiddenErrorScreen.routeName: (context) => ForbiddenErrorScreen(),
+  ForbiddenErrorScreen.routeName: (context) => ForbiddenErrorScreen(),//401-403 error
   MailErrorScreen.routeName: (context) => MailErrorScreen(),
+  UnknownRouteScreen.routeName: (context) => UnknownRouteScreen(),
 
 
 

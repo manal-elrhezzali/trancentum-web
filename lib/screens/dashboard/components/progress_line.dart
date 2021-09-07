@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
+import 'package:trancentum_web_app/providers/expeditions.dart';
 
 class ProgressLine extends StatelessWidget {
   const ProgressLine({
@@ -12,25 +13,27 @@ class ProgressLine extends StatelessWidget {
   final PackagesStatusInfo info;
   final List<PackagesStatusInfo> myPackages;
 
-  double calculatePercentage(
-      List<PackagesStatusInfo> packagesInfo, PackagesStatusInfo package) {
-    int sumOfPackages = calculateSumOfPackages(packagesInfo);
-    double percentage = (package.nbrOfPackages * 100 / sumOfPackages);
-    print(percentage);
-    return percentage;
-  }
+  // double calculatePercentage(
+  //     List<PackagesStatusInfo> packagesInfo, PackagesStatusInfo package) {
+  //   int sumOfPackages = calculateSumOfPackages(packagesInfo);
+  //   double percentage = (package.nbrOfPackages * 100 / sumOfPackages);
+  //   // print(percentage);
+  //   return percentage;
+  // }
 
-  int calculateSumOfPackages(List<PackagesStatusInfo> packagesInfo) {
-    int sumOfPackages = 0;
-    packagesInfo.forEach((onePackage) {
-      sumOfPackages += onePackage.nbrOfPackages;
-    });
-    print(sumOfPackages);
-    return sumOfPackages;
-  }
+  // int calculateSumOfPackages(List<PackagesStatusInfo> packagesInfo) {
+  //   int sumOfPackages = 0;
+  //   packagesInfo.forEach((onePackage) {
+  //     sumOfPackages += onePackage.nbrOfPackages;
+  //   });
+  //   // print(sumOfPackages);
+  //   return sumOfPackages;
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final expeditionsData = Provider.of<Expeditions>(context, listen: true);
+    final nbrOfExpeditions = expeditionsData.itemCount;
     return Stack(
       children: [
         Container(
@@ -43,9 +46,12 @@ class ProgressLine extends StatelessWidget {
         ),
         LayoutBuilder(
           builder: (context, constraints) => Container(
+            // width: constraints.maxWidth *
+            //     (calculatePercentage(myPackages, info) /
+            //         calculateSumOfPackages(myPackages)),
             width: constraints.maxWidth *
-                (calculatePercentage(myPackages, info) /
-                    calculateSumOfPackages(myPackages)),
+                expeditionsData.calculatePercentageOfExpeditionsPerStatus(
+                        nbrOfExpeditions, info.nbrOfPackages),
             height: 5,
             decoration: BoxDecoration(
               color: info.color,

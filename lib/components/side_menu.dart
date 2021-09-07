@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.dart';
+import 'package:trancentum_web_app/screens/profile/profile_screen.dart';
 import 'package:trancentum_web_app/screens/settings/settings_screen.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
@@ -35,7 +36,8 @@ class SideMenu extends StatelessWidget {
             title: "Compte",
             iconSvg: "assets/icons/User Icon.svg",
             press: () {
-              //add navigator of ...
+              Navigator.of(context)
+                  .pushReplacementNamed(ProfileScreen.routeName);
             },
           ),
           DrawerListTile(

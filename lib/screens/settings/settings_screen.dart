@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //side menu
+              //side menu 
               Expanded(child: SideMenu()),
               //home body
               Expanded(

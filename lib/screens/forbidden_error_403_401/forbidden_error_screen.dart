@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import 'package:trancentum_web_app/screens/mail_not_sent/mail_error_screen.dart';
 
 import '../../constants.dart';

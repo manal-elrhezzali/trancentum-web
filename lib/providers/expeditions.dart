@@ -146,7 +146,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "323456789",
         codeExpedition: "623456",
         codeGenere: "323456",
-        etat: "Retour",
+        etat: "Retou",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),

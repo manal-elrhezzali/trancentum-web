@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/profile/profile_screen.dart';
 
 import '../../../constants.dart';
 import '../../../responsive.dart';
@@ -10,31 +11,34 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: defaultPadding),
-      padding: EdgeInsets.symmetric(
-        horizontal: defaultPadding,
-        vertical: defaultPadding / 2,
-      ),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(color: Colors.white10),
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            "assets/images/profile_image_placeholder.png",
-            height: 38,
-          ),
-          if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Dummy Tummy"),
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(ProfileScreen.routeName),
+      child: Container(
+        margin: EdgeInsets.only(left: defaultPadding),
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultPadding,
+          vertical: defaultPadding / 2,
+        ),
+        decoration: BoxDecoration(
+          color: secondaryColor,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(color: Colors.white10),
+        ),
+        child: Row(
+          children: [
+            Image.asset(
+              "assets/images/profile_image_placeholder.png",
+              height: 38,
             ),
-          Icon(Icons.keyboard_arrow_right),
-        ],
+            if (!Responsive.isMobile(context))
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                child: Text("Dummy Tummy"),
+              ),
+            Icon(Icons.keyboard_arrow_right),
+          ],
+        ),
       ),
     );
   }

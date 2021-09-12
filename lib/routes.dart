@@ -5,6 +5,7 @@ import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
 import 'screens/dashboard/dashboard_screen.dart';
 import 'screens/expedition_detail/expedition_detail_screen.dart';
+import 'screens/expeditions_by_status/expeditions_by_status_screen.dart';
 import 'screens/forbidden_error_403_401/forbidden_error_screen.dart';
 import 'screens/forgot_password/forgot_pasword_screen.dart';
 import 'screens/mail_not_sent/mail_error_screen.dart';
@@ -22,6 +23,7 @@ final Map<String, WidgetBuilder> routes = {
   SettingsScreen.routeName: (context) => SettingsScreen(),
   ExpeditionDetailScreen.routeName: (context) => ExpeditionDetailScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
+  ExpeditionsByStatusScreen.routeName: (context) => ExpeditionsByStatusScreen(),
 
 
   //error screens

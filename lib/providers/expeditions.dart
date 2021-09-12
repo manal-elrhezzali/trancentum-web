@@ -10,7 +10,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "123456789",
         codeExpedition: "123456",
         codeGenere: "123456",
-        etat: "Chargee",
+        etat: "Chargée",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),
@@ -37,7 +37,7 @@ class Expeditions with ChangeNotifier {
       codeABarre: "223456789",
       codeExpedition: "223456",
       codeGenere: "223456",
-      etat: "Cloturee",
+      etat: "Clôturée",
       dCloturation: DateTime.now(),
       dLivraison: DateTime.now(),
       dcreation: DateTime.now(),
@@ -65,7 +65,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "323456789",
         codeExpedition: "323456",
         codeGenere: "323456",
-        etat: "Enregistree",
+        etat: "Enregistrée",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),
@@ -92,7 +92,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "323456789",
         codeExpedition: "423456",
         codeGenere: "323456",
-        etat: "Livree",
+        etat: "Livrée",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),
@@ -119,7 +119,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "323456789",
         codeExpedition: "523456",
         codeGenere: "323456",
-        etat: "Recue",
+        etat: "Reçue",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),
@@ -173,7 +173,7 @@ class Expeditions with ChangeNotifier {
         codeABarre: "123456789",
         codeExpedition: "723456",
         codeGenere: "123456",
-        etat: "Chargee",
+        etat: "Chargée",
         dCloturation: DateTime.now(),
         dLivraison: DateTime.now(),
         dcreation: DateTime.now(),
@@ -200,7 +200,7 @@ class Expeditions with ChangeNotifier {
       codeABarre: "123456789",
       codeExpedition: "823456",
       codeGenere: "123456",
-      etat: "Cloturee",
+      etat: "Clôturée",
       dCloturation: DateTime.now(),
       dLivraison: DateTime.now(),
       dcreation: DateTime.now(),
@@ -252,7 +252,7 @@ class Expeditions with ChangeNotifier {
   int get nbrOfExpeditionsRecue {
     _expeditionRecueCount = 0;
     _items.forEach((element) {
-      if (element.etat == "Recue") {
+      if (element.etat == "Reçue") {
         _expeditionRecueCount++;
       }
     });
@@ -262,7 +262,7 @@ class Expeditions with ChangeNotifier {
   int get nbrOfExpeditionsEnregistree {
     _expeditionEnregistreeCount = 0;
     _items.forEach((element) {
-      if (element.etat == "Enregistree") {
+      if (element.etat == "Enregistrée") {
         _expeditionEnregistreeCount++;
       }
     });
@@ -272,7 +272,7 @@ class Expeditions with ChangeNotifier {
   int get nbrOfExpeditionsLivree {
     _expeditionLivreeCount = 0;
     _items.forEach((element) {
-      if (element.etat == "Livree") {
+      if (element.etat == "Livrée") {
         _expeditionLivreeCount++;
       }
     });
@@ -282,7 +282,7 @@ class Expeditions with ChangeNotifier {
   int get nbrOfExpeditionsChargee {
     _expeditionChargeeCount = 0;
     _items.forEach((element) {
-      if (element.etat == "Chargee") {
+      if (element.etat == "Chargée") {
         _expeditionChargeeCount++;
       }
     });
@@ -292,7 +292,7 @@ class Expeditions with ChangeNotifier {
   int get nbrOfExpeditionsCloturee {
     _expeditionClotureeCount = 0;
     _items.forEach((element) {
-      if (element.etat == "Cloturee") {
+      if (element.etat == "Clôturée") {
         _expeditionClotureeCount++;
       }
     });

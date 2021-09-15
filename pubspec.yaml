@@ -34,6 +34,7 @@ dependencies:
   #for sending mail to user
   #not supported for web
   mailer: ^5.0.2
+  http: ^0.13.3
   
   #flutter_mailer: ^2.0.0
 

@@ -74,8 +74,9 @@ class _BodyState extends State<Body> {
       SnackBar(
         content: Text(
           "Profile modifié",
+          style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: primaryColor,
       ),
     );
   }

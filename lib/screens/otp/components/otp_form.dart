@@ -1,7 +1,11 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
+import 'package:http/http.dart' as http;
+import 'package:trancentum_web_app/screens/mail_not_sent/mail_error_screen.dart';
+import 'dart:convert';
+
+// import 'package:mailer/mailer.dart';
+// import 'package:mailer/smtp_server.dart';
 
 import '../../../constants.dart';
 
@@ -14,69 +18,91 @@ class OtpForm extends StatefulWidget {
 
 class _OtpFormState extends State<OtpForm> {
   String otpCode = "";
-  	
-final _formKey = GlobalKey<FormState>();
+
+  final _formKey = GlobalKey<FormState>();
 
   void _verifyOTP(String email, String userOTP) async {
     var result = EmailAuth.validate(receiverMail: email, userOTP: userOTP);
     if (result) {
       print("OTP Verified");
-      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       "OTP Verified",
-      //     ),
-      //   ),
-      // );
-      _sendPasswordToUser(email);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "OTP verified",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
+      _sendPasswordToUser(
+        email: 'testtestrzzl99@gmail.com',
+        name: 'TranCENTUM',
+        subject: 'You forgot your password?',
+        message: 'QWERTYQEQWTRDWTDWYDTDQTYDTWDQTYD',
+        clientEmail: email,
+      );
     } else {
       print("Invalid OTP");
-      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       "Invalid OTP",
-      //     ),
-      //   ),
-      // );
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Invalid OTP",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
     }
   }
 
-  void _sendPasswordToUser(String email) async {
-    String username = 'testtestrzzl99@gmail.com';
-    String password = 'poiuytrewq97531@';
-
-    final smtpServer = gmail(username, password);
-
-    // Create our message.
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add(email)
-      ..subject = 'Your TranCENTUM account Password :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html =
-          "<h1>Your Password</h1>\n<p>Here add the password test test test</p>";
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       "Message sent",
-      //     ),
-      //   ),
-      // );
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      // Navigator.of(context).pushReplacementNamed(ErrorScreen.routeName);
-
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
+  Future _sendPasswordToUser({
+    @required String name,
+    @required String clientEmail,
+    @required String subject,
+    @required String message,
+    @required String email,
+  }) async {
+    final serviceId = 'service_1s2nsjg';
+    final templateId = 'template_shok8of';
+    final userId = 'user_PquyFgJDIMLBBbabATOOC';
+    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+    final response = await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'user_name': name,
+          'user_email': email,
+          'user_subject': subject,
+          'user_message': message,
+          'to_email': clientEmail,
+        }
+      }),
+    );
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Email sent succesfully",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
+    } else if (response.statusCode == 400) {
+      Navigator.of(context).pushReplacementNamed(MailErrorScreen.routeName);
     }
+
+    print(response.body);
   }
 
   void _saveForm(String email, String userOTP) {

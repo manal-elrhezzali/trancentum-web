@@ -27,42 +27,54 @@ class Body extends StatelessWidget {
                     width: null,
                     height: null,
                   ),
-            Expanded(
+            SingleChildScrollView(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(2 * defaultPadding),
-                    child: Text(
-                      "Verification OTP",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4
-                          .copyWith(color: reallyWhiteColor),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Container(
+                      // width: double.infinity,
+                      padding: EdgeInsets.all(2 * defaultPadding),
+                      child: Text(
+                        "Verification OTP",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4
+                            .copyWith(color: reallyWhiteColor),
+                      ),
                     ),
                   ),
                   SizedBox(height: defaultPadding),
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      "We sent a 6-digit code to your email",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      maxLines: 3,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .copyWith(color: whiteColor),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Container(
+                      // width: double.infinity,
+                      child: Text(
+                        "We sent a 6-digit code to your email",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .copyWith(color: whiteColor),
+                      ),
                     ),
                   ),
                   SizedBox(height: defaultPadding),
-                  buildTimer(context),
-                  Spacer(),
-                  OtpForm(),
-                  Spacer(flex: 2),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: buildTimer(context),
+                  ),
+                  SizedBox(height: 2 * defaultPadding),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: OtpForm(),
+                  ),
                 ],
               ),
             ),

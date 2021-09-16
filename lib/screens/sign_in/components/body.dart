@@ -11,27 +11,43 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Responsive(
-      mobile: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/images/logo_trancentum_without_bg.png",
-            width: 150,
-            height: 150,
-          ),
-          SizedBox(height: defaultPadding * 3),
-          SignInForm(),
-          Spacer(),
-        ],
+      mobile: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              fit: FlexFit.loose,
+              child: Image.asset(
+                "assets/images/logo_trancentum_without_bg.png",
+                width: 150,
+                height: 150,
+              ),
+            ),
+            SizedBox(height: defaultPadding * 3),
+            Flexible(
+              fit: FlexFit.loose,
+              child: SignInForm(),
+            ),
+          ],
+        ),
       ),
-      desktop: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Header(),
-          Spacer(),
-          SignInForm(),
-          Spacer(flex: 2),
-        ],
+      desktop: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              fit: FlexFit.loose,
+              child: Header(),
+            ),
+            SizedBox(height: defaultPadding * 3),
+            Flexible(
+              fit: FlexFit.loose,
+              child: SignInForm(),
+            ),
+          ],
+        ),
       ),
     );
   }

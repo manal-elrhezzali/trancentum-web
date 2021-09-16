@@ -13,11 +13,8 @@ class ForgotPasswordForm extends StatefulWidget {
 }
 
 class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
-  	
-final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   String email = "";
-  var emailPattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
   void _sendOTP() async {
     EmailAuth.sessionName = "Test Session";
@@ -35,8 +32,6 @@ final _formKey = GlobalKey<FormState>();
       return;
     }
     _formKey.currentState.save();
-    /////remove these prints
-    print(email);
     _sendOTP();
     Navigator.of(context).pushNamed(OtpScreen.routeName, arguments: email);
   }
@@ -107,18 +102,23 @@ final _formKey = GlobalKey<FormState>();
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Vous n'avez pas de compte?",
-                  style: TextStyle(
-                    color: whiteColor,
-                    fontSize: 18,
+                Expanded(
+                  child: Text(
+                    "Vous n'avez pas de compte?",
+                    overflow: TextOverflow.ellipsis,
+                    // textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: whiteColor,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),
-                if (_size.width > 392) NoAccountButton(),
+                if (_size.width > 400) NoAccountButton(),
               ],
             ),
-            if (_size.width < 392) NoAccountButton(),
+            if (_size.width < 400) NoAccountButton(),
           ],
         ),
       ),

@@ -107,25 +107,25 @@ class _BodyState extends State<Body> {
       return;
     }
     _formKey.currentState.save();
-    /////remove these prints
-    print(nomExpediteur);
-    print(telExpediteur);
-    print(_initialValueVilleExpediteur);
-    //
-    print(nbrDeBonsLivraison);
-    print(nbrFactures);
-    print(montant);
-    print(nombre);
-    print(_initialValueTypeDeRetours);
-    //
-    print(nomDestinataire);
-    print(telDestinataire);
-    print(_initialValueVilleDestinataire);
+    // /////remove these prints
+    // print(nomExpediteur);
+    // print(telExpediteur);
+    // print(_initialValueVilleExpediteur);
+    // //
+    // print(nbrDeBonsLivraison);
+    // print(nbrFactures);
+    // print(montant);
+    // print(nombre);
+    // print(_initialValueTypeDeRetours);
+    // //
+    // print(nomDestinataire);
+    // print(telDestinataire);
+    // print(_initialValueVilleDestinataire);
 
-    print(nombreDeColis);
-    print(_initialValueTypeMarchandise);
-    print(_initialValueModePaiement);
-    print(_initialValueTypeTaxation);
+    // print(nombreDeColis);
+    // print(_initialValueTypeMarchandise);
+    // print(_initialValueModePaiement);
+    // print(_initialValueTypeTaxation);
 
     Navigator.of(context).pushNamed(DashboardScreen.routeName);
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -138,21 +138,9 @@ class _BodyState extends State<Body> {
       ),
     );
   }
-
-  // @override
-  // void dispose() {
-  //   _telExpediteurFocusNode.dispose();
-  //   _telDestinataireFocusNode.dispose();
-  //   _nbrFacturesFocusNode.dispose();
-  //   _montantRetoursDeFondsFocusNode.dispose();
-  //   _nbrRetoursDeFondsFocusNode.dispose();
-  //   super.dispose();
-  // }
-
   @override
   void dispose() {
     _telExpediteurFocusNode.dispose();
-    _nomDestinataireFocusNode.dispose();
     _villeExpediteurFocusNode.dispose();
 /////////////////
     _nomDestinataireFocusNode.dispose();
@@ -165,14 +153,12 @@ class _BodyState extends State<Body> {
     _nbrRetoursDeFondsFocusNode.dispose();
     _typeDeRetoursFocusNode.dispose();
 /////////////////
-
     _nbrColisFocusNode.dispose();
     _typeDeMarchandiseFocusNode.dispose();
     _modePaiementFocusNode.dispose();
     _typeTaxationFocusNode.dispose();
 /////////////////
     _submitButtonFocusNode.dispose();
-
     super.dispose();
   }
 
@@ -190,7 +176,6 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-
     //get json Map from Back-End
     villes = [
       {

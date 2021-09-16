@@ -3,14 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/screens/mail_error/mail_error_screen.dart';
-import 'package:trancentum_web_app/screens/unknown_route/unknown_route_screen.dart';
+import 'package:trancentum_web_app/screens/no_result_found_404/no_result_found_screen.dart';
 
 import '../../constants.dart';
 import '../../responsive.dart';
 
-class NoResultFoundScreen extends StatelessWidget {
-  static String routeName = "/no_result_found";
+class MailErrorScreen extends StatelessWidget {
+  static String routeName = "/mail_error";
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class NoResultFoundScreen extends StatelessWidget {
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (Responsive.isDesktop(context))
               Expanded(
@@ -29,7 +28,7 @@ class NoResultFoundScreen extends StatelessWidget {
                 ? Expanded(
                     flex: 2,
                     child: SvgPicture.asset(
-                      "assets/icons/result_not_found_.svg",
+                      "assets/icons/email not sent.svg",
                       width: double.infinity,
                     ),
                   )
@@ -63,7 +62,7 @@ class NoResultFoundScreen extends StatelessWidget {
                         // width: double.infinity,
                         padding: EdgeInsets.all(2 * defaultPadding),
                         child: Text(
-                          "Expedition non trouvée",
+                          "Ooops! Something went wrong",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           maxLines: 3,
@@ -78,9 +77,9 @@ class NoResultFoundScreen extends StatelessWidget {
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
-                        // width: double.infinity,
+                        width: double.infinity,
                         child: Text(
-                          "Veuillez entrer un code d'expedition valide ",
+                          "Please Try Again Later ",
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           maxLines: 5,
@@ -91,7 +90,7 @@ class NoResultFoundScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 2 * defaultPadding),
+                    SizedBox(height: defaultPadding * 4),
                     Flexible(
                       fit: FlexFit.loose,
                       child: Padding(
@@ -102,14 +101,14 @@ class NoResultFoundScreen extends StatelessWidget {
                           child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
-                                  UnknownRouteScreen
-                                      .routeName); //use dashboard instead
+                                  NoResultFoundScreen
+                                      .routeName); //use sign in instead
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             color: redColor,
                             child: Text(
-                              "Go to Dashboard",
+                              "Go to Sign In",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: whiteColor,

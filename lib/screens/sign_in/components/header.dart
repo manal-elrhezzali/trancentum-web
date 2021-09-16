@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants.dart';
 
 class Header extends StatelessWidget {
+  _openURL() async {
+    if (await canLaunch("https://trancentum.com/")) {
+      await launch("https://trancentum.com/");
+    } else {
+      print("could not launch");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,7 +40,7 @@ class Header extends StatelessWidget {
         ),
         SizedBox(width: 2 * defaultPadding),
         OutlinedButton(
-          onPressed: () {},
+          onPressed: _openURL,
           style: OutlinedButton.styleFrom(
             primary: whiteColor,
             padding: EdgeInsets.all(defaultPadding),

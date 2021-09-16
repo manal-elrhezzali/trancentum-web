@@ -4,16 +4,10 @@ import 'size_config.dart';
 
 const kPrimaryColor = Color(0xFF3A37C2);
 const kPrimaryLightColor = Color(0xFF858BA6);
-// const kPrimaryGradientColor = LinearGradient(
-//   begin: Alignment.topLeft,
-//   end: Alignment.bottomRight,
-//   colors: [Color(0xFF6470A6), Color(0xFF4256A6)],
-// );
 const kSecondaryColor = Color(0xFF979797);
 const greyColor = Color(0xFF757575);
 
 const kAnimationDuration = Duration(milliseconds: 200);
-
 const defaultDuration = Duration(milliseconds: 250);
 
 //Dashbord / HomeScreen
@@ -26,14 +20,11 @@ const reallyWhiteColor = Colors.white;
 const greenColor = Color(0xFF1EB980);
 const defaultPadding = 16.0;
 const redColor = Color(0xFFFF6859);
-//add brown
-//add orange
 
 //regex patterns
 const String emailPattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-// Form Error
-//add ICE RegExp
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+//add tel fax fixe regex
 const String kIceNullError = "Please Enter your ICE";
 const String kInvalidIceError = "Please Enter Valid Ice";
 const String kPasswordNullError = "Please Enter your password";
@@ -56,8 +47,8 @@ OutlineInputBorder outlineInputBorder() {
   );
 }
 
- const underlineInputBorder = UnderlineInputBorder(
-      borderSide: BorderSide(
-        color: bgColor,
-      ),
-    );
+const underlineInputBorder = UnderlineInputBorder(
+  borderSide: BorderSide(
+    color: bgColor,
+  ),
+);

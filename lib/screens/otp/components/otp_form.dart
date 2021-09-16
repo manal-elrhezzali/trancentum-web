@@ -1,13 +1,11 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:trancentum_web_app/screens/mail_not_sent/mail_error_screen.dart';
 import 'dart:convert';
 
-// import 'package:mailer/mailer.dart';
-// import 'package:mailer/smtp_server.dart';
-
 import '../../../constants.dart';
+import 'package:trancentum_web_app/screens/mail_error/mail_error_screen.dart';
+
 
 class OtpForm extends StatefulWidget {
   const OtpForm({Key key}) : super(key: key);
@@ -18,13 +16,11 @@ class OtpForm extends StatefulWidget {
 
 class _OtpFormState extends State<OtpForm> {
   String otpCode = "";
-
   final _formKey = GlobalKey<FormState>();
 
   void _verifyOTP(String email, String userOTP) async {
     var result = EmailAuth.validate(receiverMail: email, userOTP: userOTP);
     if (result) {
-      print("OTP Verified");
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -43,7 +39,6 @@ class _OtpFormState extends State<OtpForm> {
         clientEmail: email,
       );
     } else {
-      print("Invalid OTP");
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -160,8 +155,6 @@ class _OtpFormState extends State<OtpForm> {
               child: FlatButton(
                 onPressed: () {
                   _saveForm(email, otpCode);
-                  print(email);
-                  print(otpCode);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
@@ -176,7 +169,6 @@ class _OtpFormState extends State<OtpForm> {
                 ),
               ),
             ),
-            SizedBox(height: 2 * defaultPadding),
           ],
         ),
       ),

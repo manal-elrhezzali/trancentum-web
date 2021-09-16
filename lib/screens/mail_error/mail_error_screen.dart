@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/screens/no_result_found_404/no_result_found_screen.dart';
+import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../../constants.dart';
 import '../../responsive.dart';
@@ -18,7 +18,6 @@ class MailErrorScreen extends StatelessWidget {
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (Responsive.isDesktop(context))
               Expanded(
@@ -59,7 +58,6 @@ class MailErrorScreen extends StatelessWidget {
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
-                        // width: double.infinity,
                         padding: EdgeInsets.all(2 * defaultPadding),
                         child: Text(
                           "Ooops! Something went wrong",
@@ -101,8 +99,8 @@ class MailErrorScreen extends StatelessWidget {
                           child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
-                                  NoResultFoundScreen
-                                      .routeName); //use sign in instead
+                                  SignInScreen
+                                      .routeName);
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),

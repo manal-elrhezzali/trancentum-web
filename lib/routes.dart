@@ -26,10 +26,10 @@ final Map<String, WidgetBuilder> routes = {
   OtpScreen.routeName: (context) => OtpScreen(),//scrollable
 
   //error screens
-  NoResultFoundScreen.routeName: (context) => NoResultFoundScreen(),//scrollable
+  NoResultFoundScreen.routeName: (context) => NoResultFoundScreen(),//scrollable (when no search result is found for an expedition code)
   ForbiddenErrorScreen.routeName: (context) => ForbiddenErrorScreen(),//scrollable  //401-403 error
-  MailErrorScreen.routeName: (context) => MailErrorScreen(),//scrollable
-  UnknownRouteScreen.routeName: (context) => UnknownRouteScreen(),//scrollable
+  MailErrorScreen.routeName: (context) => MailErrorScreen(),//scrollable (when after OTP validation the email is not send to user)
+  UnknownRouteScreen.routeName: (context) => UnknownRouteScreen(),//scrollable (when flutter doesn't find a page to paint)
 
 
 

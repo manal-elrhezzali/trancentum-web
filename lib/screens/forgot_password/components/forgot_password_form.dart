@@ -20,9 +20,27 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
     EmailAuth.sessionName = "Test Session";
     var response = await EmailAuth.sendOtp(receiverMail: email);
     if (response) {
-      print("OTP SENT SUCCESSFULLY");
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "OTP sent succesfully!",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
     } else {
-      print("we could not send the OTP code");
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Could not send OTP please try again later! ",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
     }
   }
 
@@ -106,7 +124,6 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                   child: Text(
                     "Vous n'avez pas de compte?",
                     overflow: TextOverflow.ellipsis,
-                    // textAlign: TextAlign.center,
                     maxLines: 2,
                     style: TextStyle(
                       color: whiteColor,

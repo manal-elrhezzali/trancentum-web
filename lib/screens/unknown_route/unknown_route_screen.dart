@@ -59,7 +59,6 @@ class UnknownRouteScreen extends StatelessWidget {
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
-                        // width: double.infinity,
                         padding: EdgeInsets.all(2 * defaultPadding),
                         child: Text(
                           "Page not found",
@@ -102,7 +101,7 @@ class UnknownRouteScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
                                   DashboardScreen
-                                      .routeName); //use dashboard instead
+                                      .routeName);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),

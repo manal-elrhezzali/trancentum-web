@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/screens/mail_error/mail_error_screen.dart';
-import 'package:trancentum_web_app/screens/unknown_route/unknown_route_screen.dart';
+import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
+
 
 import '../../constants.dart';
 import '../../responsive.dart';
@@ -60,7 +60,6 @@ class NoResultFoundScreen extends StatelessWidget {
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
-                        // width: double.infinity,
                         padding: EdgeInsets.all(2 * defaultPadding),
                         child: Text(
                           "Expedition non trouvée",
@@ -78,7 +77,6 @@ class NoResultFoundScreen extends StatelessWidget {
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
-                        // width: double.infinity,
                         child: Text(
                           "Veuillez entrer un code d'expedition valide ",
                           overflow: TextOverflow.ellipsis,
@@ -102,7 +100,7 @@ class NoResultFoundScreen extends StatelessWidget {
                           child: FlatButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
-                                  UnknownRouteScreen
+                                  DashboardScreen
                                       .routeName); //use dashboard instead
                             },
                             shape: RoundedRectangleBorder(

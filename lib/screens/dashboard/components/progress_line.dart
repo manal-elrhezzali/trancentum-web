@@ -13,23 +13,6 @@ class ProgressLine extends StatelessWidget {
   final PackagesStatusInfo info;
   final List<PackagesStatusInfo> myPackages;
 
-  // double calculatePercentage(
-  //     List<PackagesStatusInfo> packagesInfo, PackagesStatusInfo package) {
-  //   int sumOfPackages = calculateSumOfPackages(packagesInfo);
-  //   double percentage = (package.nbrOfPackages * 100 / sumOfPackages);
-  //   // print(percentage);
-  //   return percentage;
-  // }
-
-  // int calculateSumOfPackages(List<PackagesStatusInfo> packagesInfo) {
-  //   int sumOfPackages = 0;
-  //   packagesInfo.forEach((onePackage) {
-  //     sumOfPackages += onePackage.nbrOfPackages;
-  //   });
-  //   // print(sumOfPackages);
-  //   return sumOfPackages;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final expeditionsData = Provider.of<Expeditions>(context, listen: true);
@@ -46,9 +29,6 @@ class ProgressLine extends StatelessWidget {
         ),
         LayoutBuilder(
           builder: (context, constraints) => Container(
-            // width: constraints.maxWidth *
-            //     (calculatePercentage(myPackages, info) /
-            //         calculateSumOfPackages(myPackages)),
             width: constraints.maxWidth *
                 expeditionsData.calculatePercentageOfExpeditionsPerStatus(
                         nbrOfExpeditions, info.nbrOfPackages),

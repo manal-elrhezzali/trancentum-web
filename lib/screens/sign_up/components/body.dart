@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/screens/sign_in/components/header.dart';
 import 'package:trancentum_web_app/responsive.dart';
+import 'package:trancentum_web_app/screens/sign_up/components/header.dart';
 
 import '../../../constants.dart';
-import 'sign_in_form.dart';
+
+import 'sign_up_form.dart';
 
 class Body extends StatelessWidget {
   const Body({Key key}) : super(key: key);
@@ -27,7 +28,7 @@ class Body extends StatelessWidget {
             SizedBox(height: defaultPadding * 3),
             Flexible(
               fit: FlexFit.loose,
-              child: SignInForm(),
+              child: SignUpForm(),
             ),
           ],
         ),
@@ -44,7 +45,7 @@ class Body extends StatelessWidget {
             SizedBox(height: defaultPadding * 3),
             Flexible(
               fit: FlexFit.loose,
-              child: SignInForm(),
+              child: SignUpForm(),
             ),
           ],
         ),

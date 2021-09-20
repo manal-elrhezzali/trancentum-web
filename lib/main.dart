@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
+import 'package:trancentum_web_app/screens/sign_up/sign_up_screen.dart';
 import 'constants.dart';
 import 'controllers/MenuController.dart';
+import 'providers/auth.dart';
 import 'providers/banques.dart';
 import 'providers/expeditions.dart';
 import 'providers/marchandises.dart';
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Auth(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => Expeditions(),
         ),
@@ -59,7 +64,7 @@ class MyApp extends StatelessWidget {
               .apply(bodyColor: Colors.white),
           canvasColor: bgColor,
         ),
-        home: SignInScreen(),
+        home: SignUpScreen(),
         routes: routes,
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => UnknownRouteScreen());

@@ -12,10 +12,12 @@ import 'screens/forgot_password/forgot_pasword_screen.dart';
 import 'screens/mail_error/mail_error_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/sign_in/sign_in_screen.dart';
+import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/unknown_route/unknown_route_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   SignInScreen.routeName: (context) => SignInScreen(), //scrollable
+  SignUpScreen.routeName: (context) => SignUpScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),//scrollable
   DashboardScreen.routeName: (context) => DashboardScreen(),//scrollable
   NewExpeditionScreen.routeName: (context) => NewExpeditionScreen(),//scrollable

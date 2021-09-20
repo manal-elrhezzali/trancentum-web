@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
         ),
         SizedBox(width: 2 * defaultPadding),
         Text(
-          "Se connecter à TranCENTUM",
+          "Sign up à TranCENTUM",
           style: TextStyle(
             color: whiteColor,
             fontSize: 28,
@@ -32,12 +32,6 @@ class Header extends StatelessWidget {
           ),
         ),
         Spacer(flex: 2),
-        Text(
-          "Vous n'avez pas de compte ?",
-          style: TextStyle(
-            color: whiteColor,
-          ),
-        ),
         SizedBox(width: 2 * defaultPadding),
         OutlinedButton(
           onPressed: _openURL,

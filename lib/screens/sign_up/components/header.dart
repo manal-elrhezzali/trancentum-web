@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../constants.dart';
@@ -32,6 +33,15 @@ class Header extends StatelessWidget {
           ),
         ),
         Spacer(flex: 2),
+        InkWell(
+          onTap: () => Navigator.of(context).pushNamed(SignInScreen.routeName),
+          child: Text(
+            "Vous avez dèjà un compte ?",
+            style: TextStyle(
+              color: redColor,
+            ),
+          ),
+        ),
         SizedBox(width: 2 * defaultPadding),
         OutlinedButton(
           onPressed: _openURL,

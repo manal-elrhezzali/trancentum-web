@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/client.dart';
+import 'package:trancentum_web_app/models/http_exception.dart';
+import 'package:trancentum_web_app/providers/auth.dart';
 import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
 
@@ -13,41 +16,82 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
+  Map<String, String> _authData = {
+    'email': '',
+    'password': '',
+  };
+  var _isLoading = false;
   bool rememberMeIsChecked = false;
   bool visibility = false;
-  	
-final _formKey = GlobalKey<FormState>();
-  Client user = new Client(email: "", password: "", id: "c4");
+
+  final _formKey = GlobalKey<FormState>();
 
   final _passwordFocusNode = FocusNode();
-  
+
   @override
   void dispose() {
     _passwordFocusNode.dispose();
     super.dispose();
   }
 
-  void _saveForm() {
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("An error occurred!"),
+        content: Text(message),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Text("Okay"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _saveForm() async {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return;
     }
     _formKey.currentState.save();
+    setState(() {
+      _isLoading = true;
+    });
 
     ///remove these prints
-    print(user.email);
-    print(user.password);
-    Navigator.of(context).pushNamed(DashboardScreen.routeName);
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Logged In",
-          style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+    print(_authData["email"]);
+    print(_authData["password"]);
+    try {
+      await Provider.of<Auth>(context, listen: false).login(
+        _authData["email"],
+        _authData["password"]
+      );
+      Navigator.of(context).pushNamed(DashboardScreen.routeName);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Logged In",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
         ),
-        backgroundColor: primaryColor,
-      ),
-    );
+      );
+    } on HttpException catch (error) {
+      _showErrorDialog(error.toString());
+    } 
+    catch (error) {
+      const errorMessage = "Could not authenticate you! Please try again later.";
+      _showErrorDialog(errorMessage);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -68,7 +112,7 @@ final _formKey = GlobalKey<FormState>();
           child: Column(
             children: [
               TextFormField(
-                onSaved: (newValue) => user.email = newValue,
+                onSaved: (newValue) => _authData["email"] = newValue,
                 onFieldSubmitted: (value) {
                   FocusScope.of(context).requestFocus(_passwordFocusNode);
                 },
@@ -102,7 +146,7 @@ final _formKey = GlobalKey<FormState>();
               SizedBox(height: defaultPadding),
               TextFormField(
                 focusNode: _passwordFocusNode,
-                onSaved: (newValue) => user.password = newValue,
+                onSaved: (newValue) => _authData["password"] = newValue,
                 validator: (value) {
                   if (value.isEmpty) {
                     return "Please provide a password";
@@ -174,24 +218,27 @@ final _formKey = GlobalKey<FormState>();
                 ],
               ),
               SizedBox(height: 2 * defaultPadding),
-              SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: FlatButton(
-                  onPressed: _saveForm,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  color: redColor,
-                  child: Text(
-                    "Se connecter",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: whiteColor,
-                      fontWeight: FontWeight.bold,
+              if (_isLoading)
+                CircularProgressIndicator()
+              else
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: FlatButton(
+                    onPressed: _saveForm,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    color: redColor,
+                    child: Text(
+                      "Se connecter",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
               if (_size.width < 350) SizedBox(height: defaultPadding),
               if (_size.width < 350)
                 InkWell(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trancentum_web_app/screens/sign_up/sign_up_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../constants.dart';
@@ -32,10 +33,13 @@ class Header extends StatelessWidget {
           ),
         ),
         Spacer(flex: 2),
-        Text(
-          "Vous n'avez pas de compte ?",
-          style: TextStyle(
-            color: whiteColor,
+        InkWell(
+          onTap: () => Navigator.of(context).pushNamed(SignUpScreen.routeName),
+          child: Text(
+            "Vous n'avez pas de compte ?",
+            style: TextStyle(
+              color: redColor,
+            ),
           ),
         ),
         SizedBox(width: 2 * defaultPadding),

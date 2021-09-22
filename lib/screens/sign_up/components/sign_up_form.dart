@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trancentum_web_app/models/http_exception.dart';
+import 'package:trancentum_web_app/providers/auth.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../../../constants.dart';
@@ -30,7 +33,25 @@ class _SignUpFormState extends State<SignUpForm> {
     super.dispose();
   }
 
-  void _saveForm() {
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("An error occurred!"),
+        content: Text(message),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Text("Okay"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _saveForm() async {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return;
@@ -39,27 +60,36 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() {
       _isLoading = true;
     });
-
-    //do HTTP stuff
-
+    print(_authData["email"]);
+    print(_authData["password"]);
+    try {
+      //do HTTP stuff here
+      await Provider.of<Auth>(context, listen: false)
+          .signUp(_authData["email"], _authData["password"]);
+      Navigator.of(context).pushNamed(SignInScreen.routeName);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "You have been registered.",
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+        ),
+      );
+    } on HttpException catch (error) {
+      //change the errorMessage and use error instead
+      //once you modify the server response and 
+      //add customized error message in the server response
+      const errorMessage = "Something went wrong. Please try again.";
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage = "Could not register you. Please try again later.";
+      _showErrorDialog(errorMessage);
+    }
     setState(() {
       _isLoading = false;
     });
-
-    ///remove these prints
-    print(_authData["email"]);
-    print(_authData["password"]);
-    Navigator.of(context).pushNamed(SignInScreen.routeName);
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Signed Up",
-          style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: primaryColor,
-      ),
-    );
   }
 
   @override

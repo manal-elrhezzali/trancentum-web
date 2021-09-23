@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:trancentum_web_app/providers/client.dart';
+import 'package:trancentum_web_app/screens/become_a_client/become_a_client_screen.dart';
+import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
-import 'package:trancentum_web_app/screens/sign_up/sign_up_screen.dart';
 import 'constants.dart';
 import 'controllers/MenuController.dart';
 import 'providers/auth.dart';
@@ -15,6 +17,7 @@ import 'providers/notifications.dart';
 import 'providers/retours_de_fonds.dart';
 import 'providers/villes.dart';
 import 'routes.dart';
+import 'screens/forbidden_error_403_401/forbidden_error_screen.dart';
 import 'screens/unknown_route/unknown_route_screen.dart';
 
 void main() {
@@ -33,8 +36,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => Expeditions(),
+        ChangeNotifierProxyProvider<Auth, Client>(
+          create: null,
+          update: (ctx, auth, previousClients) => Client(
+            auth.token,
+            auth.userId
+            // previousClients == null ? [] : previousClients.listOfClients,
+          ),
+        ),
+        ChangeNotifierProxyProvider2<Auth, Client, Expeditions>(
+          create: null,
+          update: (ctx, auth, client, previousExpeditions) => Expeditions(
+            auth.token,
+            client.clientId,
+            previousExpeditions == null ? [] : previousExpeditions.items,
+          ),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Villes(),
@@ -55,20 +71,23 @@ class MyApp extends StatelessWidget {
           create: (context) => MenuController(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'TranCENTUM',
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: darkBgColor,
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-              .apply(bodyColor: Colors.white),
-          canvasColor: bgColor,
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TranCENTUM',
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: darkBgColor,
+            textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+                .apply(bodyColor: Colors.white),
+            canvasColor: bgColor,
+          ),
+          //(auth.isClient ? DashboardScreen() : ( (auth.userId != null) ? BecomeAClientScreen(userId : auth.userId): ForbiddenErrorScreen()))
+          home: auth.isAuth ? DashboardScreen(): SignInScreen(),
+          routes: routes,
+          onUnknownRoute: (settings) {
+            return MaterialPageRoute(builder: (ctx) => UnknownRouteScreen());
+          },
         ),
-        home: SignUpScreen(),
-        routes: routes,
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(builder: (ctx) => UnknownRouteScreen());
-        },
       ),
     );
   }

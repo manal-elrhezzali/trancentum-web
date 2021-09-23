@@ -4,6 +4,7 @@ import 'package:trancentum_web_app/screens/new_expedition/new_expedition_screen.
 import 'package:trancentum_web_app/screens/no_result_found_404/no_result_found_screen.dart';
 import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
+import 'screens/become_a_client/become_a_client_screen.dart';
 import 'screens/dashboard/dashboard_screen.dart';
 import 'screens/expedition_detail/expedition_detail_screen.dart';
 import 'screens/expeditions_by_status/expeditions_by_status_screen.dart';
@@ -26,6 +27,7 @@ final Map<String, WidgetBuilder> routes = {
   ProfileScreen.routeName: (context) => ProfileScreen(),//scrollable
   ExpeditionsByStatusScreen.routeName: (context) => ExpeditionsByStatusScreen(),  
   OtpScreen.routeName: (context) => OtpScreen(),//scrollable
+  BecomeAClientScreen.routeName: (context) => BecomeAClientScreen(),
 
   //error screens
   NoResultFoundScreen.routeName: (context) => NoResultFoundScreen(),//scrollable (when no search result is found for an expedition code)

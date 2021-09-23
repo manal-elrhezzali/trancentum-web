@@ -66,24 +66,17 @@ class _SignUpFormState extends State<SignUpForm> {
       //do HTTP stuff here
       await Provider.of<Auth>(context, listen: false)
           .signUp(_authData["email"], _authData["password"]);
-      Navigator.of(context).pushNamed(SignInScreen.routeName);
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "You have been registered.",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: primaryColor,
-        ),
-      );
+      Navigator.of(context).pushReplacementNamed(SignInScreen.routeName);
+
     } on HttpException catch (error) {
       //change the errorMessage and use error instead
-      //once you modify the server response and 
+      //once you modify the server response and
       //add customized error message in the server response
+       print("IN HTTP CATCH" + error.toString());
       const errorMessage = "Something went wrong. Please try again.";
-      _showErrorDialog(errorMessage);
+      _showErrorDialog(error.toString());
     } catch (error) {
+      print("IN CATCH" + error.toString());
       const errorMessage = "Could not register you. Please try again later.";
       _showErrorDialog(errorMessage);
     }

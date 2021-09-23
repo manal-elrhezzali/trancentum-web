@@ -223,6 +223,10 @@ class Expeditions with ChangeNotifier {
     //   villeExpediteurId: "v1",
     // ),
   ];
+  final String authToken;
+  final String clientId;
+
+  Expeditions(this.authToken, this.clientId, this._items);
 
   int _expeditionEnregistreeCount;
   int _expeditionRecueCount;

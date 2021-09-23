@@ -6,14 +6,36 @@ import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/components/side_menu.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/providers/client.dart';
+import 'package:trancentum_web_app/screens/become_a_client/become_a_client_screen.dart';
 
 import '../../responsive.dart';
 import 'components/dashboard_content.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   static String routeName = "/dashboard";
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<Client>(context, listen: false).getClient();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List data = Provider.of<Client>(context).listOfClients;
+
+    if (data.isEmpty) {
+      return BecomeAClientScreen();
+    }
+    print(data);
     // if ((defaultTargetPlatform == TargetPlatform.iOS) ||
     //     (defaultTargetPlatform == TargetPlatform.android)) {
     //   print("I am a phone");
@@ -24,6 +46,7 @@ class DashboardScreen extends StatelessWidget {
     // } else {
     //   print("I am a web");
     // }
+    //check if userId is a client
 
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,

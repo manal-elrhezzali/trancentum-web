@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trancentum_web_app/models/client.dart';
 import 'package:trancentum_web_app/models/http_exception.dart';
 import 'package:trancentum_web_app/providers/auth.dart';
 import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
@@ -70,17 +69,17 @@ class _SignInFormState extends State<SignInForm> {
         _authData["email"],
         _authData["password"]
       );
-      Navigator.of(context).pushNamed(DashboardScreen.routeName);
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Logged In",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: primaryColor,
-        ),
-      );
+      // Navigator.of(context).pushReplacementNamed(DashboardScreen.routeName);
+      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(
+      //       "Logged In",
+      //       style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+      //     ),
+      //     backgroundColor: primaryColor,
+      //   ),
+      // );
     } on HttpException catch (error) {
       _showErrorDialog(error.toString());
     } 

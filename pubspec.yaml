@@ -46,6 +46,10 @@ dependencies:
   provider: ^4.3.1
   #for date formatting
   intl: ^0.17.0
+  #classes and helper functions that support JSON code generation
+  #json_annotation: ^4.1.0
+  #shared_preferences
+  shared_preferences: ^0.5.3+1
 
 
 dev_dependencies:

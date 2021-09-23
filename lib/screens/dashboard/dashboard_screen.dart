@@ -22,15 +22,16 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((_) {
       Provider.of<Client>(context, listen: false).getClient();
-    });
+    //   Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Client>(context, listen: false).getClient();
+    // });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List data = Provider.of<Client>(context).listOfClients;
+    List data =  Provider.of<Client>(context).listOfClients;
 
     if (data.isEmpty) {
       return BecomeAClientScreen();
@@ -46,7 +47,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // } else {
     //   print("I am a web");
     // }
-    //check if userId is a client
 
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,

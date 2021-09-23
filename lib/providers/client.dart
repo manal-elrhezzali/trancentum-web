@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:trancentum_web_app/models/client_request_model.dart';
 import 'package:trancentum_web_app/models/http_exception.dart';
 
 class Client with ChangeNotifier {
@@ -16,12 +17,7 @@ class Client with ChangeNotifier {
   Client(
     this.authToken,
     this.userId,
-    // this._listOfClients
   );
-
-  bool get isClient {
-    return clientId != null;
-  }
 
   String get clientId {
     if (_clientId != null) {
@@ -30,16 +26,14 @@ class Client with ChangeNotifier {
     return null;
   }
 
-  Future<void> createClient(
-    String adresse,
-    String cinRc,
-    String code,
-    String fax,
-    String fixe,
-    String ice,
-    String nomRs,
-    String tel,
-  ) async {
+  String get utilisateurId {
+    if (userId != null) {
+      return userId;
+    }
+    return null;
+  }
+
+  Future<void> createClient(ClientRequestModel client) async {
     final url =
         Uri.https('pfe-trancentum.herokuapp.com', '/api/private/client');
     try {
@@ -50,34 +44,18 @@ class Client with ChangeNotifier {
           "accept": "*/*",
           "authorization": authToken
         },
-        body: json.encode(
-          {
-            {
-              "adresse": adresse,
-              "cin_rc": cinRc,
-              "code": code,
-              "enCompte": 0,
-              "faxe": fax,
-              "fixe": fixe,
-              "ice": ice,
-              "nom_rs": nomRs,
-              "tel": tel,
-              "utilisateur_id": userId
-            }
-          },
-        ),
+        body: jsonEncode(client),
       );
       print(response.body.toString());
-      var responseData = json.decode(response.body) as Map<String, dynamic>;
+      var responseData = json.decode(response.body);
       if (responseData['error'] != null) {
-        print("CLIENT RESPONSE HAS ERROR KEY");
+        print(responseData);
         throw HttpException("Failed to create a CLIENT!");
       }
       _clientId = responseData['id'];
-      print(_clientId);
       notifyListeners();
     } catch (error) {
-      print("IN CLIENT CATCH CLAUSE");
+      print(error.toString());
       throw error;
     }
   }
@@ -97,12 +75,10 @@ class Client with ChangeNotifier {
           "accept": "*/*",
         },
       );
-      // print(response.body.toString());
       var responseData = json.decode(response.body);
-      print(responseData);
+      // print(responseData);
       final List loadedClients = [];
       if (responseData['error'] != null) {
-        print("Failed to create CLIENTS!");
         throw HttpException("Failed to create CLIENTS!");
       }
       final List extractedData = responseData['content'] as List<dynamic>;
@@ -118,14 +94,7 @@ class Client with ChangeNotifier {
       }
       _listOfClients = loadedClients;
       notifyListeners();
-      // if (listOfClients.isNotEmpty && _userId != null) {
-      //   var result = listOfClients.firstWhere(
-      //       (client) => client['utilisateur']['id'] == _userId, orElse: () {
-      //     return null;
-      //   });
-      // }
     } catch (error) {
-      print("IN GET CLIENTS CATCH CLAUSE");
       throw error;
     }
   }

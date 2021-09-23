@@ -83,7 +83,7 @@ class Auth with ChangeNotifier {
       }
       _token = response.headers['authorization'];
       _userId = response.headers['userid'];
-      print("In LOGIN: " + _userId);
+      // print("In LOGIN: " + _userId);
       //token "expires" after 30 min
       _expiryDate = DateTime.now().add(
         Duration(

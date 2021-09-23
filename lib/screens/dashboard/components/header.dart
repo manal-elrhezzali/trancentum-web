@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/screens/dashboard/components/profile_card.dart';
 import 'package:trancentum_web_app/screens/dashboard/components/search_field.dart';
 
 import '../../../responsive.dart';
@@ -28,7 +27,7 @@ class Header extends StatelessWidget {
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         Expanded(child: SearchField()),
-        ProfileCard(),
+        // ProfileCard(),
       ],
     );
   }

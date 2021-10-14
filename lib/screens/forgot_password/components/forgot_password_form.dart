@@ -1,6 +1,6 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trancentum_web_app/components/no_account_button.dart';
+import 'package:trancentum_web_app/global_widgets/no_account_button.dart';
 import 'package:trancentum_web_app/screens/otp/otp_screen.dart';
 
 import '../../../constants.dart';
@@ -17,7 +17,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   String email = "";
 
   void _sendOTP() async {
-    EmailAuth.sessionName = "Test Session";
+    EmailAuth.sessionName = "TranCENTUM";
     var response = await EmailAuth.sendOtp(receiverMail: email);
     if (response) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -51,7 +51,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
     }
     _formKey.currentState.save();
     _sendOTP();
-    Navigator.of(context).pushNamed(OtpScreen.routeName, arguments: email);
+    Navigator.of(context).pushReplacementNamed(OtpScreen.routeName, arguments: email);
   }
 
   @override

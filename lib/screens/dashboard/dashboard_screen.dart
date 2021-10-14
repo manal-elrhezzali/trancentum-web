@@ -2,68 +2,76 @@
 // import 'dart:io';
 
 // import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/providers/client.dart';
-import 'package:trancentum_web_app/screens/become_a_client/become_a_client_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 
+import '../../constants.dart';
 import '../../responsive.dart';
 import 'components/dashboard_content.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   static String routeName = "/dashboard";
-
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  @override
-  void initState() {
-      Provider.of<Client>(context, listen: false).getClient();
-    //   Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<Client>(context, listen: false).getClient();
-    // });
-    super.initState();
+  
+  Future<void> _refreshExpeditions(BuildContext context) async {
+    await Provider.of<Expeditions>(context, listen: false).fetchAndSetExpeditions();
   }
+  // @override
+  // void initState() {
+  //     Provider.of<Client>(context, listen: false).getClient();
+  //   //   Future.delayed(Duration.zero).then((_) {
+  //   //   Provider.of<Client>(context, listen: false).getClient();
+  //   // });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    List data =  Provider.of<Client>(context).listOfClients;
+    // List data =  Provider.of<Client>(context).listOfClients;
 
-    if (data.isEmpty) {
-      return BecomeAClientScreen();
-    }
-    print(data);
-    // if ((defaultTargetPlatform == TargetPlatform.iOS) ||
-    //     (defaultTargetPlatform == TargetPlatform.android)) {
-    //   print("I am a phone");
-    // } else if ((defaultTargetPlatform == TargetPlatform.linux) ||
-    //     (defaultTargetPlatform == TargetPlatform.macOS) ||
-    //     (defaultTargetPlatform == TargetPlatform.windows)) {
-    //   print("I am a desktop");
-    // } else {
-    //   print("I am a web");
+    // if (data.isEmpty) {
+    //   return BecomeAClientScreen();
     // }
+    // print(data);
+    // // if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+    // //     (defaultTargetPlatform == TargetPlatform.android)) {
+    // //   print("I am a phone");
+    // // } else if ((defaultTargetPlatform == TargetPlatform.linux) ||
+    // //     (defaultTargetPlatform == TargetPlatform.macOS) ||
+    // //     (defaultTargetPlatform == TargetPlatform.windows)) {
+    // //   print("I am a desktop");
+    // // } else {
+    // //   print("I am a web");
+    // // }
 
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+              (defaultTargetPlatform == TargetPlatform.android) ||
+              (!Responsive.isDesktop(context)))
+          ? AppBar(
+              title: Text("Dashboard"),
+              backgroundColor: bgColor,
+            )
+          : null,
       drawer: SideMenu(),
-      body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (Responsive.isDesktop(context))
+      body: RefreshIndicator(
+        onRefresh: () => _refreshExpeditions(context),
+        child: SafeArea(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (Responsive.isDesktop(context))
+                Expanded(
+                  child: SideMenu(),
+                ),
               Expanded(
-                child: SideMenu(),
+                flex: 5, //takes 5/6 of the screen
+                child: DashboardContent(),
               ),
-            Expanded(
-              flex: 5, //takes 5/6 of the screen
-              child: DashboardContent(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

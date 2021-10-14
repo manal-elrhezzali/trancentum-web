@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/http_exception.dart';
-import 'package:trancentum_web_app/providers/auth.dart';
-import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
+import 'package:trancentum_web_app/services/auth.dart';
 import 'package:trancentum_web_app/screens/forgot_password/forgot_pasword_screen.dart';
+import 'package:trancentum_web_app/screens/sign_up/sign_up_screen.dart';
 
 import '../../../constants.dart';
 
@@ -22,9 +22,7 @@ class _SignInFormState extends State<SignInForm> {
   var _isLoading = false;
   bool rememberMeIsChecked = false;
   bool visibility = false;
-
   final _formKey = GlobalKey<FormState>();
-
   final _passwordFocusNode = FocusNode();
 
   @override
@@ -60,34 +58,24 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       _isLoading = true;
     });
-
-    ///remove these prints
-    print(_authData["email"]);
-    print(_authData["password"]);
     try {
-      await Provider.of<Auth>(context, listen: false).login(
-        _authData["email"],
-        _authData["password"]
-      );
-      // Navigator.of(context).pushReplacementNamed(DashboardScreen.routeName);
-      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(
-      //       "Logged In",
-      //       style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-      //     ),
-      //     backgroundColor: primaryColor,
-      //   ),
-      // );
+      await Provider.of<Auth>(context, listen: false)
+          .login(_authData["email"], _authData["password"]);
     } on HttpException catch (error) {
-      _showErrorDialog(error.toString());
-    } 
-    catch (error) {
-      const errorMessage = "Could not authenticate you! Please try again later.";
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage =
+          "Could not authenticate you! Please try again later.";
       _showErrorDialog(errorMessage);
     }
-
     setState(() {
       _isLoading = false;
     });
@@ -104,7 +92,6 @@ class _SignInFormState extends State<SignInForm> {
     );
     return Center(
       child: Container(
-        // padding: EdgeInset,
         width: 500,
         child: Form(
           key: _formKey,
@@ -181,22 +168,17 @@ class _SignInFormState extends State<SignInForm> {
               SizedBox(height: 2 * defaultPadding),
               Row(
                 children: [
-                  Checkbox(
-                    shape: CircleBorder(),
-                    value: rememberMeIsChecked,
-                    activeColor: redColor,
-                    onChanged: (value) {
-                      setState(() {
-                        rememberMeIsChecked = value;
-                      });
-                    },
-                  ),
                   SizedBox(width: 10),
-                  Text(
-                    "Mémoriser",
-                    style: TextStyle(
-                      color: whiteColor,
-                      fontSize: 16,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(SignUpScreen.routeName);
+                    },
+                    child: Text(
+                      "Créer un compte?",
+                      style: TextStyle(
+                        color: whiteColor,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   Spacer(),

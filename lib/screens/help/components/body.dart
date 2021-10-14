@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/src/provider.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 
 import '../../../constants.dart';
-import '../../../responsive.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -31,17 +28,34 @@ class _BodyState extends State<Body> {
       return;
     }
     _formKey.currentState.save();
-    // /////remove these prints
-    print(email);
-    print(subject);
-    print(message);
-    _sendEmailToTrancentum(
-      name: "TranCENTUM",
-      email: email,
+    send();
+  }
+
+  Future<void> send() async {
+    final Email email = Email(
+      body: message,
       subject: subject,
-      message: message,
-      clientEmail: 'testtestrzzl99@gmail.com',
+      recipients: ['testtestrzzl99@gmail.com'],//change this to Trancentum's email
     );
+    String platformResponse;
+    try {
+      await FlutterEmailSender.send(email);
+      platformResponse = 'We will review your email and reply ASAP';
+    } catch (error) {
+      platformResponse = "Oops,Something went wrong! Please try again later.";
+      print(platformResponse);
+    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+         content: Text(
+            platformResponse,
+            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: primaryColor,
+      ),
+    );
+    Navigator.of(context).pushNamed(DashboardScreen.routeName);
   }
 
   @override
@@ -51,74 +65,12 @@ class _BodyState extends State<Body> {
     _messageFocusNode.dispose();
     super.dispose();
   }
-
-  Future _sendEmailToTrancentum({
-    @required String name,
-    @required String clientEmail,
-    @required String subject,
-    @required String message,
-    @required String email,
-  }) async {
-    final serviceId = 'service_1s2nsjg';
-    final templateId = 'template_u23678o';
-    final userId = 'user_PquyFgJDIMLBBbabATOOC';
-    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-    final response = await http.post(
-      url,
-      headers: {
-        'origin': 'http://localhost',
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'service_id': serviceId,
-        'template_id': templateId,
-        'user_id': userId,
-        'template_params': {
-          'user_name': name,
-          'user_email': email,
-          'user_subject': subject,
-          'user_message': message,
-          'to_email': clientEmail,
-        }
-      }),
-    );
-    if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Email sent succesfully",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: primaryColor,
-        ),
-      );
-    } else if (response.statusCode == 400) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Something went wrong, please try again later",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: primaryColor,
-        ),
-      );
-    }
-    // Navigator.of(context).pushNamed(DashboardScreen.routeName);
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!Responsive.isDesktop(context))
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: context.read<MenuController>().controlMenu,
-            ),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(defaultPadding * 2),

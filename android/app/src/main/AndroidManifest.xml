@@ -2,7 +2,7 @@
     package="com.example.trancentum_web_app">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="trancentum_web_app"
+        android:label="TranCENTUM"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

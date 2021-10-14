@@ -9,6 +9,7 @@ class Header extends StatelessWidget {
     if (await canLaunch("https://trancentum.com/")) {
       await launch("https://trancentum.com/");
     } else {
+      //show alert dialgue could not redirect you to our main website
       print("could not launch");
     }
   }
@@ -36,7 +37,7 @@ class Header extends StatelessWidget {
         InkWell(
           onTap: () => Navigator.of(context).pushNamed(SignUpScreen.routeName),
           child: Text(
-            "Vous n'avez pas de compte ?",
+            "Vous n'avez pas un compte ?",
             style: TextStyle(
               color: redColor,
             ),

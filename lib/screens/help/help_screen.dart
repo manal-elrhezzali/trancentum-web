@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
 
+import '../../constants.dart';
 import '../../responsive.dart';
 import 'components/body.dart';
 
@@ -13,9 +13,15 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
-      // backgroundColor: darkBgColor,
+      appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+              (defaultTargetPlatform == TargetPlatform.android) ||
+              (!Responsive.isDesktop(context)))
+          ? AppBar(
+              title: Text("Help"),
+              backgroundColor: bgColor,
+            )
+          : null,
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

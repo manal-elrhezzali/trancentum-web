@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/section_title.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/global_widgets/section_title.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
 
 import '../../../constants.dart';
@@ -16,25 +16,22 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  var _isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final _telExpediteurFocusNode = FocusNode();
   final _villeExpediteurFocusNode = FocusNode();
-//////////
   final _nomDestinataireFocusNode = FocusNode();
   final _telDestinataireFocusNode = FocusNode();
   final _villeDestinataireFocusNode = FocusNode();
-//////////
   final _nbrDeBonsFocusNode = FocusNode();
   final _nbrFacturesFocusNode = FocusNode();
   final _montantRetoursDeFondsFocusNode = FocusNode();
   final _nbrRetoursDeFondsFocusNode = FocusNode();
   final _typeDeRetoursFocusNode = FocusNode();
-//////////
   final _nbrColisFocusNode = FocusNode();
   final _typeDeMarchandiseFocusNode = FocusNode();
   final _modePaiementFocusNode = FocusNode();
   final _typeTaxationFocusNode = FocusNode();
-//////////
   final _submitButtonFocusNode = FocusNode();
 
   // List<Ville> villes = [];
@@ -56,8 +53,8 @@ class _BodyState extends State<Body> {
     ptaxe3: 0.0,
     dcreation: DateTime.now(),
     codeGenere: "",
-    codeExpedition: "",
-    modePaiement: "PD",
+    codeExpedition: null,
+    modePaiement: "",
     taxation: "Forfait",
     nbrColis: 0,
     nbrFactures: 0,
@@ -70,94 +67,98 @@ class _BodyState extends State<Body> {
     ttlValDeclaree: 0.0,
     typeLivraison: "",
     codeABarre: "",
-    clientDestinataireId: "",
-    clientExpediteurId: "",
+    nomDestinataire: "",
+    telDestinataire: "",
+    nomExpediteur: "",
+    telExpediteur: "",
     villeDestinataireId: "",
     villeExpediteurId: "",
+    //reglement
+    typeTaxation: "",
+    typeMarchandise: "",
+    nombre: "0",
+    //retourFonds
+    type: "",
+    montant: 0,
+    nombreBonsLivraison: 0,
   );
 
-  //// expediteur / destinataire form
-  String nomExpediteur = "";
-  String telExpediteur = "";
-  String nomDestinataire = "";
-  String telDestinataire = "";
-  //----->dropDown
-// String _initialValueVilleExpediteur = "Fes";
+  // Reglement reglement = Reglement(
+
+  //   typeTaxation: "",
+  //   codeExpedition: "",
+  //   nombre: "",
+  //   modePaiement: "",
+  //   typeMarchandise: "",
+  // );
+
+//   //----->dropDown
+// // String _initialValueVilleExpediteur = "Fes";
   var _initialValueVilleExpediteur;
   var _initialValueVilleDestinataire;
 
-  //// Retours de fonds form
-  String nbrDeBonsLivraison = "";
-  String nbrFactures = "";
-  String montant = "";
-  String nombre = "";
-  //----->dropDown
-  var _initialValueTypeDeRetours;
-
-  //// Reglements form
-  String nombreDeColis = "";
-  //----->dropDown
+  // //----->dropDown
   var _initialValueTypeMarchandise;
+  var _initialValueTyperRetours;
   var _initialValueModePaiement;
   var _initialValueTypeTaxation = "Forfait";
 
-  void _saveForm() {
+  Future<void> _saveForm() async {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return;
     }
     _formKey.currentState.save();
-    // /////remove these prints
-    // print(nomExpediteur);
-    // print(telExpediteur);
-    // print(_initialValueVilleExpediteur);
-    // //
-    // print(nbrDeBonsLivraison);
-    // print(nbrFactures);
-    // print(montant);
-    // print(nombre);
-    // print(_initialValueTypeDeRetours);
-    // //
-    // print(nomDestinataire);
-    // print(telDestinataire);
-    // print(_initialValueVilleDestinataire);
-
-    // print(nombreDeColis);
-    // print(_initialValueTypeMarchandise);
-    // print(_initialValueModePaiement);
-    // print(_initialValueTypeTaxation);
-
-    Navigator.of(context).pushNamed(DashboardScreen.routeName);
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Expedition added",
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await Provider.of<Expeditions>(context, listen: false)
+          .addExpedition(expedition);
+    } catch (error) {
+      //to wait for the user to click okay and pop the dialog
+      //before running the code in finally
+      await showDialog<Null>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("An error has occured"),
+          content: Text("Something went wrong."),
+          actions: [
+            FlatButton(
+              child: Text("Okay"),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            ),
+          ],
         ),
-        backgroundColor: primaryColor,
-      ),
+      );
+    }
+    //will run only one of the await"s"is done
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pushNamed(
+      DashboardScreen.routeName,
     );
   }
+
   @override
   void dispose() {
     _telExpediteurFocusNode.dispose();
     _villeExpediteurFocusNode.dispose();
-/////////////////
     _nomDestinataireFocusNode.dispose();
     _telDestinataireFocusNode.dispose();
     _villeDestinataireFocusNode.dispose();
-/////////////////
     _nbrDeBonsFocusNode.dispose();
     _nbrFacturesFocusNode.dispose();
     _montantRetoursDeFondsFocusNode.dispose();
     _nbrRetoursDeFondsFocusNode.dispose();
     _typeDeRetoursFocusNode.dispose();
-/////////////////
     _nbrColisFocusNode.dispose();
     _typeDeMarchandiseFocusNode.dispose();
     _modePaiementFocusNode.dispose();
     _typeTaxationFocusNode.dispose();
-/////////////////
     _submitButtonFocusNode.dispose();
     super.dispose();
   }
@@ -176,7 +177,7 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    //get json Map from Back-End
+    //get villes json Map from Back-End
     villes = [
       {
         'id': 'c1',
@@ -220,11 +221,6 @@ class _BodyState extends State<Body> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!Responsive.isDesktop(context))
-            IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: context.read<MenuController>().controlMenu,
-            ),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(defaultPadding * 2),
@@ -248,7 +244,7 @@ class _BodyState extends State<Body> {
                                   [
                                     TextFormField(
                                       onSaved: (newValue) =>
-                                          nomExpediteur = newValue,
+                                          expedition.nomExpediteur = newValue,
                                       textInputAction: TextInputAction.next,
                                       onFieldSubmitted: (_) {
                                         FocusScope.of(context).requestFocus(
@@ -281,7 +277,7 @@ class _BodyState extends State<Body> {
                                     TextFormField(
                                       focusNode: _telExpediteurFocusNode,
                                       onSaved: (newValue) =>
-                                          telExpediteur = newValue,
+                                          expedition.telExpediteur = newValue,
                                       onFieldSubmitted: (_) {
                                         FocusScope.of(context).requestFocus(
                                             _villeExpediteurFocusNode);
@@ -335,7 +331,7 @@ class _BodyState extends State<Body> {
                                       child: DropdownButtonFormField(
                                         onChanged: (newValue) {
                                           setState(() {
-                                            _initialValueVilleExpediteur =
+                                            expedition.villeExpediteurId =
                                                 newValue;
                                           });
                                           FocusScope.of(context).requestFocus(
@@ -391,8 +387,8 @@ class _BodyState extends State<Body> {
                                     [
                                       TextFormField(
                                         focusNode: _nomDestinataireFocusNode,
-                                        onSaved: (newValue) =>
-                                            nomDestinataire = newValue,
+                                        onSaved: (newValue) => expedition
+                                            .nomDestinataire = newValue,
                                         textInputAction: TextInputAction.next,
                                         onFieldSubmitted: (_) {
                                           FocusScope.of(context).requestFocus(
@@ -424,8 +420,8 @@ class _BodyState extends State<Body> {
                                       SizedBox(height: defaultPadding),
                                       TextFormField(
                                         focusNode: _telDestinataireFocusNode,
-                                        onSaved: (newValue) =>
-                                            telDestinataire = newValue,
+                                        onSaved: (newValue) => expedition
+                                            .telDestinataire = newValue,
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.phone,
                                         onFieldSubmitted: (_) {
@@ -493,7 +489,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueVilleDestinataire =
+                                              expedition.villeDestinataireId =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -542,7 +538,8 @@ class _BodyState extends State<Body> {
                                     TextFormField(
                                       focusNode: _nbrDeBonsFocusNode,
                                       onSaved: (newValue) =>
-                                          nbrDeBonsLivraison = newValue,
+                                          expedition.nombreBonsLivraison =
+                                              int.parse(newValue),
                                       textInputAction: TextInputAction.next,
                                       keyboardType: TextInputType.number,
                                       onFieldSubmitted: (_) {
@@ -578,8 +575,8 @@ class _BodyState extends State<Body> {
                                     SizedBox(height: defaultPadding),
                                     TextFormField(
                                       focusNode: _nbrFacturesFocusNode,
-                                      onSaved: (newValue) =>
-                                          nbrFactures = newValue,
+                                      onSaved: (newValue) => expedition
+                                          .nbrFactures = double.parse(newValue),
                                       textInputAction: TextInputAction.next,
                                       keyboardType: TextInputType.number,
                                       onFieldSubmitted: (value) {
@@ -613,7 +610,8 @@ class _BodyState extends State<Body> {
                                     TextFormField(
                                       focusNode:
                                           _montantRetoursDeFondsFocusNode,
-                                      onSaved: (newValue) => montant = newValue,
+                                      onSaved: (newValue) => expedition
+                                          .montant = double.parse(newValue),
                                       textInputAction: TextInputAction.next,
                                       keyboardType: TextInputType.number,
                                       onFieldSubmitted: (_) {
@@ -647,7 +645,8 @@ class _BodyState extends State<Body> {
                                     SizedBox(height: defaultPadding),
                                     TextFormField(
                                       focusNode: _nbrRetoursDeFondsFocusNode,
-                                      onSaved: (newValue) => nombre = newValue,
+                                      onSaved: (newValue) =>
+                                          expedition.nombre = newValue,
                                       textInputAction: TextInputAction.next,
                                       keyboardType: TextInputType.number,
                                       validator: (value) {
@@ -700,13 +699,12 @@ class _BodyState extends State<Body> {
                                         focusNode: _typeDeRetoursFocusNode,
                                         onChanged: (newValue) {
                                           setState(() {
-                                            _initialValueTypeDeRetours =
-                                                newValue;
+                                            expedition.type = newValue;
                                           });
                                           FocusScope.of(context).requestFocus(
                                               _nomDestinataireFocusNode);
                                         },
-                                        value: _initialValueTypeDeRetours,
+                                        value: _initialValueTyperRetours,
                                         hint: Text(
                                           "Type de retours",
                                           style: TextStyle(color: whiteColor),
@@ -758,8 +756,8 @@ class _BodyState extends State<Body> {
                                       TextFormField(
                                         focusNode: _nbrColisFocusNode,
                                         keyboardType: TextInputType.number,
-                                        onSaved: (newValue) =>
-                                            nombreDeColis = newValue,
+                                        onSaved: (newValue) => expedition
+                                            .nbrColis = double.parse(newValue),
                                         validator: (value) {
                                           if (value.isEmpty) {
                                             return "Veuillez saisir le Nombre de Colis";
@@ -819,7 +817,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueTypeMarchandise =
+                                              expedition.typeMarchandise =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -867,7 +865,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueModePaiement =
+                                              expedition.modePaiement =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -929,7 +927,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueTypeTaxation =
+                                              expedition.typeTaxation =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -983,8 +981,8 @@ class _BodyState extends State<Body> {
                                     [
                                       TextFormField(
                                         focusNode: _nomDestinataireFocusNode,
-                                        onSaved: (newValue) =>
-                                            nomDestinataire = newValue,
+                                        onSaved: (newValue) => expedition
+                                            .nomDestinataire = newValue,
                                         textInputAction: TextInputAction.next,
                                         onFieldSubmitted: (_) {
                                           FocusScope.of(context).requestFocus(
@@ -1016,8 +1014,8 @@ class _BodyState extends State<Body> {
                                       SizedBox(height: defaultPadding),
                                       TextFormField(
                                         focusNode: _telDestinataireFocusNode,
-                                        onSaved: (newValue) =>
-                                            telDestinataire = newValue,
+                                        onSaved: (newValue) => expedition
+                                            .telDestinataire = newValue,
                                         textInputAction: TextInputAction.next,
                                         keyboardType: TextInputType.phone,
                                         onFieldSubmitted: (_) {
@@ -1085,7 +1083,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueVilleDestinataire =
+                                              expedition.villeDestinataireId =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -1136,10 +1134,10 @@ class _BodyState extends State<Body> {
                                         keyboardType: TextInputType.number,
                                         textInputAction: TextInputAction.next,
                                         onSaved: (newValue) =>
-                                            nombreDeColis = newValue,
+                                            expedition.nombre = newValue,
                                         validator: (value) {
                                           if (value.isEmpty) {
-                                            return "Veuillez saisir le Nombre de Colis";
+                                            return "Veuillez saisir le Nombre ";
                                           }
                                           return null;
                                         },
@@ -1196,7 +1194,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueTypeMarchandise =
+                                              expedition.typeMarchandise =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -1244,7 +1242,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueModePaiement =
+                                              expedition.modePaiement =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(
@@ -1306,7 +1304,7 @@ class _BodyState extends State<Body> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              _initialValueTypeTaxation =
+                                              expedition.typeTaxation =
                                                   newValue;
                                             });
                                             FocusScope.of(context).requestFocus(

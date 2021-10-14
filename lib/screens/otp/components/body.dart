@@ -11,23 +11,25 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.all(2 * defaultPadding),
-        child: Row(
-          children: [
-            Responsive.isDesktop(context)
-                ? Expanded(
-                    child: SvgPicture.asset(
-                      "assets/icons/Otp Icon.svg",
-                      width: double.infinity,
-                    ),
-                  )
-                : SizedBox(
-                    width: null,
-                    height: null,
+    return Padding(
+      padding: EdgeInsets.all(defaultPadding),
+      child: Row(
+        children: [
+          Responsive.isDesktop(context)
+              ? Expanded(
+                  flex: 2,
+                  child: SvgPicture.asset(
+                    "assets/icons/Otp Icon.svg",
+                    width: double.infinity,
                   ),
-            SingleChildScrollView(
+                )
+              : SizedBox(
+                  width: null,
+                  height: null,
+                ),
+          Expanded(
+            flex: 2,
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -78,8 +80,8 @@ class Body extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -106,7 +108,8 @@ class Body extends StatelessWidget {
                 Theme.of(context).textTheme.headline6.copyWith(color: redColor),
           ),
           onEnd: () {
-            Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
+            Navigator.of(context)
+                .pushReplacementNamed(ForgotPasswordScreen.routeName);
           },
         ),
       ],

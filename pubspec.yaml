@@ -34,7 +34,8 @@ dependencies:
   http: ^0.13.3 
   #for launching webpage from within the app
   url_launcher: ^6.0.10
-
+  #to send emails form mobile apps
+  flutter_email_sender: ^5.0.2
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -46,16 +47,28 @@ dependencies:
   provider: ^4.3.1
   #for date formatting
   intl: ^0.17.0
-  #classes and helper functions that support JSON code generation
-  #json_annotation: ^4.1.0
+  #for firebase authentification API
+  firebase_auth: ^3.1.1
   #shared_preferences
   shared_preferences: ^0.5.3+1
 
 
 dev_dependencies:
+#For unit test and wdget test
   flutter_test:
     sdk: flutter
-    
+  mockito:
+  build_runner:
+  flutter_driver:
+    sdk: flutter
+  test:
+  flutter_launcher_icons: ^0.9.2
+flutter_icons:
+  android: true
+  ios: true  
+  image_path: "dev_assets/places.png"
+  adaptive_icon_background: "#191919"
+  adaptive_icon_foreground: "dev_assets/places-adaptive.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

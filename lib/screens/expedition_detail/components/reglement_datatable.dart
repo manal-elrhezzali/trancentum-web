@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:trancentum_web_app/models/expedition.dart';
-import 'package:trancentum_web_app/models/reglement.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 
 import '../../../constants.dart';
 
 class ReglementDatatable extends StatelessWidget {
-  final List<Expedition> expeditionList = [];
+  final List<Expedition> reglementList = [];
   final Expedition expeditionTrouvee;
 
   ReglementDatatable({@required this.expeditionTrouvee});
@@ -36,8 +37,8 @@ class ReglementDatatable extends StatelessWidget {
           ))
       .toList();
 
-  List<DataRow> getRows(List<Reglement> reglements) =>
-      reglements.map((Reglement reglement) {
+  List<DataRow> getRows(List<Expedition> reglements) =>
+      reglements.map((Expedition reglement) {
         final cells = [
           reglement.modePaiement,
           reglement.typeTaxation,
@@ -46,7 +47,7 @@ class ReglementDatatable extends StatelessWidget {
           reglement.montantTTC,
           reglement.nombre,
           reglement.poids,
-          reglement.type,
+          reglement.typeMarchandise,
           reglement.valeurDeclaree,
           reglement.fraisHTperColis,
           reglement.fraisHTTotal,
@@ -64,11 +65,14 @@ class ReglementDatatable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //find reglement by code expedition
+     final reglement = Provider.of<Expeditions>(context)
+        .findById(expeditionTrouvee.codeExpedition);
+    reglementList.add(reglement);
     return DataTable(
       columnSpacing: defaultPadding,
       horizontalMargin: 0,
       columns: getColumns(columns),
-      rows: getRows(demoReglements),
+      rows: getRows(reglementList),
     );
   }
 }

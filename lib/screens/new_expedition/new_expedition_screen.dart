@@ -1,9 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
 
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
 import 'package:trancentum_web_app/responsive.dart';
+import '../../constants.dart';
 import 'components/body.dart';
 
 class NewExpeditionScreen extends StatelessWidget {
@@ -13,7 +13,15 @@ class NewExpeditionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      // key: context.read<MenuController>().scaffoldKey,
+      appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+              (defaultTargetPlatform == TargetPlatform.android) ||
+              (!Responsive.isDesktop(context)))
+          ? AppBar(
+              title: Text("New Expedition"),
+              backgroundColor: bgColor,
+            )
+          : null,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

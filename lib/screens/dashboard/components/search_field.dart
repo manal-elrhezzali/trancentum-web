@@ -25,7 +25,7 @@ final _formKey = GlobalKey<FormState>();
     }
     _formKey.currentState.save();
     /////remove these prints
-    print(searchFieldValue);
+    // print(searchFieldValue);
 
     Navigator.of(context).pushNamed(ExpeditionDetailScreen.routeName,
         arguments: searchFieldValue);

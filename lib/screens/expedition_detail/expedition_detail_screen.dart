@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
-import 'package:trancentum_web_app/providers/expeditions.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 import 'package:trancentum_web_app/screens/no_result_found_404/no_result_found_screen.dart';
 
+import '../../constants.dart';
 import '../../responsive.dart';
 import 'components/body.dart';
 
@@ -13,15 +14,25 @@ class ExpeditionDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _expeditionCode = ModalRoute.of(context).settings.arguments as String;
-    print(_expeditionCode);
     final _searchedExpedition = Provider.of<Expeditions>(
       context,
       listen: false,
     ).findById(_expeditionCode);
-    return _searchedExpedition == null
+    if (_searchedExpedition != null && _expeditionCode != null) {
+      Provider.of<Expeditions>(context, listen: false)
+          .storeSearchedCodeExpedition(_expeditionCode);
+    }
+    return (_searchedExpedition == null)
         ? NoResultFoundScreen()
         : Scaffold(
-            key: context.read<MenuController>().scaffoldKey,
+            appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+                    (defaultTargetPlatform == TargetPlatform.android) ||
+                    (!Responsive.isDesktop(context)))
+                ? AppBar(
+                    title: Text("Expedition Details"),
+                    backgroundColor: bgColor,
+                  )
+                : null,
             drawer: SideMenu(),
             body: SafeArea(
               child: Row(
@@ -32,7 +43,7 @@ class ExpeditionDetailScreen extends StatelessWidget {
                       child: SideMenu(),
                     ),
                   Expanded(
-                    flex: 5, //takes 5/6 of the screen
+                    flex: 5,
                     child: Body(searchedExpedition: _searchedExpedition),
                   ),
                 ],

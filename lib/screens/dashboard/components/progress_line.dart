@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/package_status_info.dart';
-import 'package:trancentum_web_app/providers/expeditions.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 
 class ProgressLine extends StatelessWidget {
   const ProgressLine({

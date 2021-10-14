@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../../constants.dart';
@@ -14,15 +11,9 @@ class MailErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(),
       body: SafeArea(
         child: Row(
           children: [
-            if (Responsive.isDesktop(context))
-              Expanded(
-                child: SideMenu(),
-              ),
             Responsive.isDesktop(context)
                 ? Expanded(
                     flex: 2,
@@ -41,20 +32,7 @@ class MailErrorScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Row(
-                        children: [
-                          if (!Responsive.isDesktop(context))
-                            IconButton(
-                              icon: Icon(Icons.menu),
-                              onPressed:
-                                  context.read<MenuController>().controlMenu,
-                            ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 4 * defaultPadding),
+                    // SizedBox(height: 4 * defaultPadding),
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(

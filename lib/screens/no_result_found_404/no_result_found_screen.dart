@@ -1,10 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
 import 'package:trancentum_web_app/screens/dashboard/dashboard_screen.dart';
-
 
 import '../../constants.dart';
 import '../../responsive.dart';
@@ -15,7 +13,14 @@ class NoResultFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      // key: context.read<MenuController>().scaffoldKey,
+      appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+              (defaultTargetPlatform == TargetPlatform.android) || (!Responsive.isDesktop(context)))
+          ? AppBar(
+              title: null,
+              backgroundColor: bgColor,
+            )
+          : null,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
@@ -43,20 +48,7 @@ class NoResultFoundScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Row(
-                        children: [
-                          if (!Responsive.isDesktop(context))
-                            IconButton(
-                              icon: Icon(Icons.menu),
-                              onPressed:
-                                  context.read<MenuController>().controlMenu,
-                            ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 4 * defaultPadding),
+                    // SizedBox(height: 4 * defaultPadding),
                     Flexible(
                       fit: FlexFit.loose,
                       child: Container(
@@ -101,7 +93,7 @@ class NoResultFoundScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
                                   DashboardScreen
-                                      .routeName); //use dashboard instead
+                                      .routeName); 
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),

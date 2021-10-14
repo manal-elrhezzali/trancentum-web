@@ -1,11 +1,11 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:trancentum_web_app/models/http_exception.dart';
+import 'package:trancentum_web_app/services/auth.dart';
 
 import '../../../constants.dart';
 import 'package:trancentum_web_app/screens/mail_error/mail_error_screen.dart';
-
 
 class OtpForm extends StatefulWidget {
   const OtpForm({Key key}) : super(key: key);
@@ -31,12 +31,9 @@ class _OtpFormState extends State<OtpForm> {
           backgroundColor: primaryColor,
         ),
       );
-      _sendPasswordToUser(
-        email: 'testtestrzzl99@gmail.com',
-        name: 'TranCENTUM',
-        subject: 'You forgot your password?',
-        message: 'QWERTYQEQWTRDWTDWYDTDQTYDTWDQTYD',
-        clientEmail: email,
+      //send reset link to user
+      _resetPassword(
+        email: email,
       );
     } else {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -52,52 +49,41 @@ class _OtpFormState extends State<OtpForm> {
     }
   }
 
-  Future _sendPasswordToUser({
-    @required String name,
-    @required String clientEmail,
-    @required String subject,
-    @required String message,
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text("An error occurred!"),
+        content: Text(message),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Text("Okay"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _resetPassword({
     @required String email,
   }) async {
-    final serviceId = 'service_1s2nsjg';
-    final templateId = 'template_shok8of';
-    final userId = 'user_PquyFgJDIMLBBbabATOOC';
-    final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-    final response = await http.post(
-      url,
-      headers: {
-        'origin': 'http://localhost',
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'service_id': serviceId,
-        'template_id': templateId,
-        'user_id': userId,
-        'template_params': {
-          'user_name': name,
-          'user_email': email,
-          'user_subject': subject,
-          'user_message': message,
-          'to_email': clientEmail,
-        }
-      }),
-    );
-    if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Email sent succesfully",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: primaryColor,
-        ),
-      );
-    } else if (response.statusCode == 400) {
+    try {
+      await Provider.of<Auth>(context, listen: false).sendResetPasswordEmail(email);
+    } on HttpException catch (error) {
+      var errorMessage = 'Reset Password failed';
+      if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      // print("IN CATCH" + error.toString());
+      // const errorMessage = "Could not reset your password. Please try again later.";
+      // _showErrorDialog(errorMessage);
       Navigator.of(context).pushReplacementNamed(MailErrorScreen.routeName);
     }
-
-    print(response.body);
   }
 
   void _saveForm(String email, String userOTP) {

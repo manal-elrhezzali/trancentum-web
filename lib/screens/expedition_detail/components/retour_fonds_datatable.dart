@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
-import 'package:trancentum_web_app/models/retour_fonds.dart';
-import 'package:trancentum_web_app/providers/retours_de_fonds.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 
 import '../../../constants.dart';
 
 class RetourFondsDatatable extends StatelessWidget {
-  final List<RetourFonds> retourFondsList = [];
+  final List<Expedition> retourFondsList = [];
   final Expedition expeditionTrouvee;
   RetourFondsDatatable({@required this.expeditionTrouvee});
 
@@ -30,8 +29,8 @@ class RetourFondsDatatable extends StatelessWidget {
           ))
       .toList();
 
-  List<DataRow> getRows(List<RetourFonds> retoursFonds) =>
-      retoursFonds.map((RetourFonds retour) {
+  List<DataRow> getRows(List<Expedition> retoursFonds) =>
+      retoursFonds.map((Expedition retour) {
         final cells = [
           retour.type.toString().split('.').last,
           retour.montant.toString(),
@@ -51,7 +50,7 @@ class RetourFondsDatatable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final retourFonds = Provider.of<RetoursDeFonds>(context)
+    final retourFonds = Provider.of<Expeditions>(context)
         .findById(expeditionTrouvee.codeExpedition);
     retourFondsList.add(retourFonds);
     return DataTable(

@@ -1,20 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
-import 'package:trancentum_web_app/components/side_menu.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
+import 'package:trancentum_web_app/global_widgets/side_menu.dart';
 
+import '../../constants.dart';
 import '../../responsive.dart';
 import 'components/body.dart';
 
 class ExpeditionsByStatusScreen extends StatelessWidget {
   const ExpeditionsByStatusScreen({Key key}) : super(key: key);
 
- static String routeName = "/expeditions-by-status";
+  static String routeName = "/expeditions-by-status";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            key: context.read<MenuController>().scaffoldKey,
-
+      appBar: ((defaultTargetPlatform == TargetPlatform.iOS) ||
+              (defaultTargetPlatform == TargetPlatform.android) ||
+              (!Responsive.isDesktop(context)))
+          ? AppBar(
+              title: Text("Expeditions By status"),
+              backgroundColor: bgColor,
+            )
+          : null,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

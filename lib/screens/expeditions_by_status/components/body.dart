@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:trancentum_web_app/controllers/MenuController.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
-import 'package:trancentum_web_app/providers/expeditions.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 import 'package:trancentum_web_app/screens/expedition_detail/expedition_detail_screen.dart';
 
 import '../../../constants.dart';
-import '../../../responsive.dart';
 
 class Body extends StatelessWidget {
   const Body({Key key}) : super(key: key);
@@ -27,21 +25,7 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(defaultPadding),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      if (!Responsive.isDesktop(context))
-                        IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: context.read<MenuController>().controlMenu,
-                        ),
-                      if (!Responsive.isMobile(context))
-                        Text(
-                          "Expeditions par état",
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                    ],
-                  ),
-                  SizedBox(height: defaultPadding),
+                  // SizedBox(height: defaultPadding),
                   Text(
                     "Aucune expedition trouvée",
                     style: Theme.of(context).textTheme.title,
@@ -66,21 +50,7 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(defaultPadding),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      if (!Responsive.isDesktop(context))
-                        IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: context.read<MenuController>().controlMenu,
-                        ),
-                      if (!Responsive.isMobile(context))
-                        Text(
-                          "Expeditions by state",
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                    ],
-                  ),
-                  SizedBox(height: defaultPadding),
+                  // SizedBox(height: defaultPadding),
                   Container(
                     padding: EdgeInsets.all(defaultPadding),
                     decoration: BoxDecoration(

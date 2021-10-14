@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/http_exception.dart';
-import 'package:trancentum_web_app/providers/auth.dart';
+import 'package:trancentum_web_app/services/auth.dart';
 import 'package:trancentum_web_app/screens/sign_in/sign_in_screen.dart';
 
 import '../../../constants.dart';
@@ -67,14 +67,20 @@ class _SignUpFormState extends State<SignUpForm> {
       await Provider.of<Auth>(context, listen: false)
           .signUp(_authData["email"], _authData["password"]);
       Navigator.of(context).pushReplacementNamed(SignInScreen.routeName);
-
     } on HttpException catch (error) {
-      //change the errorMessage and use error instead
-      //once you modify the server response and
-      //add customized error message in the server response
-       print("IN HTTP CATCH" + error.toString());
-      const errorMessage = "Something went wrong. Please try again.";
-      _showErrorDialog(error.toString());
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
     } catch (error) {
       print("IN CATCH" + error.toString());
       const errorMessage = "Could not register you. Please try again later.";
@@ -144,6 +150,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 validator: (value) {
                   if (value.isEmpty) {
                     return "Please provide a password";
+                  }
+                  if (value.length < 6) {
+                    return "Please enter at least 6 characters";
                   }
                   return null;
                 },

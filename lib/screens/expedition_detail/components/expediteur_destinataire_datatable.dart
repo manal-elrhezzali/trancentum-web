@@ -29,8 +29,10 @@ class ExpediteurDestinataireDatatable extends StatelessWidget {
       expeditions.map((Expedition expedition) {
         
         final cells = [
-          expedition.clientExpediteurId, // replace with expediteur name
-          expedition.clientDestinataireId, // replace with destinateur name
+          // expedition.nomExpediteur, // replace with expediteur name
+          // expedition.nomDestinataire, // replace with destinateur name
+          "Manal EL RHEZZALI",
+          "Aya Hamani",
           expedition.villeExpediteurId,
           expedition.villeDestinataireId,
         ];
@@ -44,6 +46,7 @@ class ExpediteurDestinataireDatatable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //get the villeExpediteur and villeDestinataireId from their id 
     expeditionList.add(expeditionTrouvee);
     return DataTable(
       columnSpacing: defaultPadding,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:trancentum_web_app/models/expedition.dart';
-import 'package:trancentum_web_app/providers/expeditions.dart';
+import 'package:trancentum_web_app/services/expeditions.dart';
 import 'package:trancentum_web_app/screens/expedition_detail/expedition_detail_screen.dart';
 
 
@@ -15,9 +15,7 @@ class RecentExpeditionsArray extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //get expeditions from local storage
-    final expeditionsData = Provider.of<Expeditions>(context);
-    final expeditions = expeditionsData.items;
+    final recentExpeditionsData = Provider.of<Expeditions>(context,listen: false).searchedItems;
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -72,9 +70,9 @@ class RecentExpeditionsArray extends StatelessWidget {
                   ),
                 ],
                 rows: List.generate(
-                    expeditions.length,
+                    recentExpeditionsData.length,
                     (index) => buildRecentExpeditionsDataRow(
-                        expeditions[index], context)),
+                        recentExpeditionsData[index], context)),
               ),
             ),
           ),

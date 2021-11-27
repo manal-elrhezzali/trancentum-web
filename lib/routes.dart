@@ -33,13 +33,4 @@ final Map<String, WidgetBuilder> routes = {
   MailErrorScreen.routeName: (context) => MailErrorScreen(),//scrollable (when after OTP validation the email is not send to user)
   UnknownRouteScreen.routeName: (context) => UnknownRouteScreen(),//scrollable (when flutter doesn't find a page to paint)
 
-
-
-
-
-  // BecomeAClientScreen.routeName: (context) => BecomeAClientScreen(),
-  // DetailsClientScreen.routeName: (context) => DetailsClientScreen(),
-  // ForbiddenErrorScreen.routeName: (context) => ForbiddenErrorScreen(),//scrollable  //401-403 error
-
-
 };
